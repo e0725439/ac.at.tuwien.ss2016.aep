@@ -6,7 +6,7 @@
 %%% Date: March 2011
 
 %%% Preamble
-\documentclass[paper=a4, fontsize=11pt]{scrartcl}	% Article class of KOMA-script with 11pt font and a4 format
+\documentclass[11pt,english]{article}
 \usepackage[T1]{fontenc}
 \usepackage{fourier}
 
@@ -15,12 +15,13 @@
 \usepackage{amsmath,amsfonts,amsthm}										% Math packages
 \usepackage[pdftex]{graphicx}														% Enable pdflatex
 \usepackage{url}
-
-
-%%% Custom sectioning (sectsty package)
-\usepackage{sectsty}												% Custom sectioning (see below)
-\allsectionsfont{\centering \normalfont\scshape}	% Change font of al section commands
-
+\usepackage{color}   %May be necessary if you want to color links
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true, %set true if you want colored links
+    linktoc=all,     %set to all if you want both sections and subsections linked
+    linkcolor=black,  %choose some color if you want links to stand out
+}
 
 %%% Custom headers/footers (fancyhdr package)
 \usepackage{fancyhdr}
@@ -39,7 +40,6 @@
 \numberwithin{figure}{section}			% Figurenumbering: section.fig#
 \numberwithin{table}{section}				% Tablenumbering: section.tab#
 
-
 %%% Maketitle metadata
 \newcommand{\horrule}[1]{\rule{\linewidth}{#1}} 	% Horizontal rule
 
@@ -51,21 +51,34 @@
 		\huge 105.625 Advanced Economics Project 2016S  \\
 		\horrule{2pt} \\[0.5cm]
 }
+
 \author{
-		\normalfont 								\normalsize
-        9702170, Karin Leithner \\[-3pt]		\normalsize 
-				0725439, Florin Bogdan Balint \\[-3pt]		\normalsize
-				1025735, Clemens Proyer \\[-3pt]		\normalsize
-				1027143, Mattias Haberbusch\\[-3pt]		\normalsize
-				1027433, Thomas Solich \\[-3pt]
-        \today
+  Karin, Leithner\\
+  \small{\texttt{e9702170@student.tuwien.ac.at}}
+  \and
+  Florin Bogdan, Balint\\
+  \small{\texttt{e0725439@student.tuwien.ac.at}}
+	\and
+  Clemens, Proyer\\
+  \small{\texttt{e1025735@student.tuwien.ac.at}}
+	\and
+  Mattias, Haberbusch\\
+  \small{\texttt{e1027143@student.tuwien.ac.at}}
+	\and
+  Thomas, Solich\\
+  \small{\texttt{e1027433@student.tuwien.ac.at}}
 }
-\date{}
 
 
 %%% Begin document
 \begin{document}
-\maketitle
+\begin{titlepage}
+  \maketitle
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
 \section{Heading on level 1 (section)}
 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus:
 \begin{align} 
@@ -118,5 +131,13 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula 
 	\item Second item in a list 
 	\item Third item in a list
 \end{enumerate}
+
+
+\newpage
+\begin{appendix}
+  \listoffigures
+  \listoftables
+\end{appendix}
+
 %%% End document
 \end{document}
