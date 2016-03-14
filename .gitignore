@@ -1,6 +1,6 @@
-/.aux
-/.bbl
-/.lof
-/.lot
-/.out
-/.toc
+*.aux
+*.bbl
+*.lof
+*.lot
+*.out
+*.toc
