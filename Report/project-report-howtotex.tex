@@ -9,7 +9,9 @@
 \documentclass[11pt,english]{article}
 \usepackage[T1]{fontenc}
 \usepackage{fourier}
-
+\usepackage[utf8]{inputenc}
+\usepackage{caption}
+\usepackage{subcaption}
 \usepackage[english]{babel}															% English language/hyphenation
 \usepackage[protrusion=true,expansion=true]{microtype}				% Better typography
 \usepackage{amsmath,amsfonts,amsthm}										% Math packages
@@ -17,6 +19,12 @@
 \usepackage{url}
 \usepackage{color}   %May be necessary if you want to color links
 \usepackage{hyperref}
+\usepackage[nottoc]{tocbibind}
+\usepackage{titling}
+\usepackage{titlesec}
+\newcommand{\sectionbreak}{\clearpage}
+\graphicspath{{figures/}}
+\setcounter{section}{0}
 \hypersetup{
     colorlinks=true, %set true if you want colored links
     linktoc=all,     %set to all if you want both sections and subsections linked
@@ -44,43 +52,49 @@
 \newcommand{\horrule}[1]{\rule{\linewidth}{#1}} 	% Horizontal rule
 
 \title{
-		%\vspace{-1in} 	
-		\usefont{OT1}{bch}{b}{n}
-		\normalfont \normalsize \textsc{Vienna University of Technology} \\ [25pt]
-		\horrule{0.5pt} \\[0.4cm]
-		\huge 105.625 Advanced Economics Project 2016S  \\
-		\horrule{2pt} \\[0.5cm]
+	%\vspace{-1in} 	
+	\usefont{OT1}{bch}{b}{n}
+	\normalfont \normalsize \textsc{Vienna University of Technology} \\ [25pt]
+	\normalfont \normalsize \textsc{105.625 PR Advanced Economics Project} \\ [25pt]
+	\horrule{0.5pt} \\[0.4cm]
+	\huge Doublesided Matching
+	\horrule{2pt} \\[0.5cm]
 }
 
 \author{
-  Karin, Leithner\\
-  \small{\texttt{e9702170@student.tuwien.ac.at}}
-  \and
-  Florin Bogdan, Balint\\
-  \small{\texttt{e0725439@student.tuwien.ac.at}}
-	\and
-  Clemens, Proyer\\
-  \small{\texttt{e1025735@student.tuwien.ac.at}}
-	\and
-  Mattias, Haberbusch\\
-  \small{\texttt{e1027143@student.tuwien.ac.at}}
-	\and
-  Thomas, Solich\\
-  \small{\texttt{e1027433@student.tuwien.ac.at}}
+  9702170, Karin Leithner\\
+  0725439, Florin Bogdan Balint\\
+  1025735, Clemens Proyer\\
+  1027143, Mattias Haberbusch\\
+  1027433, Thomas Solich\\
 }
-
 
 %%% Begin document
 \begin{document}
+
 \begin{titlepage}
-  \maketitle
+	\begin{center}
+		\thetitle
+		\vspace{2cm}
+	\end{center}
+	\begin{flushleft}
+	\vfill
+	\theauthor
+	\end{flushleft}
+	\begin{center}
+		\vspace{2cm}
+		{\large \today\par}
+	\end{center}
 \end{titlepage}
 
 \tableofcontents
 \newpage
 
-\section{Heading on level 1 (section)}
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus:
+\section{Introduction}
+Text...
+
+\section{Example}
+Lorem\cite{Turing1936} ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus:
 \begin{align} 
 	\begin{split}
 	(x+y)^3 	&= (x+y)^2(x+y)\\
@@ -90,6 +104,12 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula 
 	\end{split}					
 \end{align}
 Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies 
+
+\begin{figure}[!ht]
+  \caption{One angry bird.}
+  \centering
+    \includegraphics[width=0.5\textwidth]{image_example}
+\end{figure}
 
 \subsection{Heading on level 2 (subsection)}
 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
@@ -106,10 +126,7 @@ Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et 
 Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.
 
 \paragraph{Heading on level 4 (paragraph)}
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. 
-
-
-\section{Lists}
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
 
 \subsection{Example for list (3*itemize)}
 \begin{itemize}
@@ -132,12 +149,19 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula 
 	\item Third item in a list
 \end{enumerate}
 
+\newpage
+\listoffigures
 
 \newpage
-\begin{appendix}
-  \listoffigures
-  \listoftables
-\end{appendix}
+\listoftables
+
+
+\newpage
+%\addcontentsline{toc}{section}{References}
+% Add a bibliography.
+% Possiblilities: alpha, IEEEtran, abbrv, unsrt
+\bibliographystyle{unsrt}
+\bibliography{bibliography}
 
 %%% End document
 \end{document}
