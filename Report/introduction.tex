@@ -1,7 +1,8 @@
-Lorem\cite{Turing1936} ipsum dolor.
+In this project we investigated the double sided matching problem (also known as the stable matching problem) along with its application in economics. At the beginning a theoretical overview in algorithmic game theory is provided. Afterwards we implemented a functional prototype in NetLogo\cite{netlogo}. This prototype was evaluated based on two matching problems: matching of students seeking an university place and universities offering those places in Austria and the matching of the labor supply and labor demand in the European Union.
 
-\subsection{bla bla bla}
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
+\subsection{The Stable Matching Problem}
+The stable matching problem refers to the problem of finding a matching between two sets of elements which may be equally sized. In \cite{gale62a} this problem is firstly described based on an example of college admission: a college is considering a set of $n$ applicants of which it can admin only a quota of $q$.
 
-\subsection{one bla}
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
+The assignment of students and colleges is not allowed to be unstable, i.e.\ there are two applicants $\alpha$ and $\beta$ who are assigned to colleges $A$ and $B$ although $\beta$ prefers $A$ to $B$ and $A$ prefers $\alpha$ to $\beta$. If this does not occur, the assignment is called \textit{stable}. In case there is more than one stable solution the \textit{optimal} one is of particular interest. In the previously mentioned college example a stable assignment is called \textit{optimal} if every applicant is at least well off as it would be under any other stable assignment \cite{gale62a}. In Economics this is also known as pareto efficiency \cite[p. 46]{9780199297818}.
+
+
