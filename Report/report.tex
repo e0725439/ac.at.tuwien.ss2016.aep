@@ -11,13 +11,14 @@
 \usepackage{fourier}
 \usepackage[utf8]{inputenc}
 \usepackage{caption}
+\usepackage{tocloft}
 \usepackage{subcaption}
 \usepackage[english]{babel}															% English language/hyphenation
-\usepackage[protrusion=true,expansion=true]{microtype}				% Better typography
+\usepackage[protrusion=true,expansion=true]{microtype}	% Better typography
 \usepackage{amsmath,amsfonts,amsthm}										% Math packages
 \usepackage[pdftex]{graphicx}														% Enable pdflatex
 \usepackage{url}
-\usepackage{color}   %May be necessary if you want to color links
+\usepackage{color}   																		%May be necessary if you want to color links
 \usepackage{hyperref}
 \usepackage[nottoc]{tocbibind}
 \usepackage{titling}
@@ -89,7 +90,9 @@
 	\end{center}
 \end{titlepage}
 
+\setlength{\cftbeforesecskip}{9pt}
 \tableofcontents
+
 \newpage
 
 \section{Introduction}
@@ -107,7 +110,7 @@
 \section{Prototype Evaluation: Labor Market in the European Union}
 \input{evaluation_labor}
 
-\section{Summary and Future Work}
+\section{Summary}
 \input{summary}
 
 \section{Example}
