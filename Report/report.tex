@@ -8,21 +8,23 @@
 %%% Preamble
 \documentclass[11pt,english]{article}
 \usepackage[T1]{fontenc}
-\usepackage{fourier}
-\usepackage[utf8]{inputenc}
-\usepackage{caption}
-\usepackage{tocloft}
-\usepackage{subcaption}
-\usepackage[english]{babel}															% English language/hyphenation
+\usepackage{fourier} %Add Utopia fonts 
+\usepackage[utf8]{inputenc} %Use UTF8 as inputencryption
+\usepackage{caption} %Add captions helper
+\usepackage{tocloft} %Add Table of Content (ToC) Styler
+\usepackage{subcaption} % Add supcaptions helper
+\usepackage[english]{babel} % English language/hyphenation
 \usepackage[protrusion=true,expansion=true]{microtype}	% Better typography
-\usepackage{amsmath,amsfonts,amsthm}										% Math packages
-\usepackage[pdftex]{graphicx}														% Enable pdflatex
-\usepackage{url}
-\usepackage{color}   																		%May be necessary if you want to color links
-\usepackage{hyperref}
-\usepackage[nottoc]{tocbibind}
-\usepackage{titling}
-\usepackage{titlesec}
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage[pdftex]{graphicx} % Enable pdflatex
+\usepackage{url} %Add URL helper
+\usepackage{color} %May be necessary if you want to color links
+\usepackage{hyperref} %Add label and inpaper nagivation helper
+\usepackage[nottoc]{tocbibind} %Remove the Table of Content (ToC) from the ToC
+\usepackage{titling} %Add title helper
+\usepackage{titlesec} %Add text style helper
+\usepackage{fancyhdr} %Add header and footer helper
+\usepackage{todonotes} %Add ToDo Notes helper
 
 \newcommand{\sectionbreak}{\clearpage}
 \graphicspath{{figures/}}
@@ -30,28 +32,25 @@
 \hypersetup{
     colorlinks=true, %set true if you want colored links
     linktoc=all,     %set to all if you want both sections and subsections linked
-    linkcolor=black,  %choose some color if you want links to stand out
+    linkcolor=black, %choose some color if you want links to stand out
 }
 
 \setlength{\parindent}{0em}
-\setlength{\parskip}{1em}
-
-%%% Custom headers/footers (fancyhdr package)
-\usepackage{fancyhdr}
+\setlength{\parskip}{1em} % Custom headers/footers (fancyhdr package)
 \pagestyle{fancyplain}
-\fancyhead{}														% No page header
-%\fancyfoot[L]{\small \url{HowToTeX.com}}		% You may remove/edit this line 
-\fancyfoot[C]{}													% Empty
-\fancyfoot[R]{\thepage}									% Pagenumbering
-\renewcommand{\headrulewidth}{0pt}			% Remove header underlines
-\renewcommand{\footrulewidth}{0pt}				% Remove footer underlines
+\fancyhead{}% No page header
+%\fancyfoot[L]{\small \url{HowToTeX.com}} % You may remove/edit this line 
+\fancyfoot[C]{}	% Empty
+\fancyfoot[R]{\thepage}	% Pagenumbering
+\renewcommand{\headrulewidth}{0pt}% Remove header underlines
+\renewcommand{\footrulewidth}{0pt}% Remove footer underlines
 \setlength{\headheight}{13.6pt}
 
 
 %%% Equation and float numbering
-\numberwithin{equation}{section}		% Equationnumbering: section.eq#
-\numberwithin{figure}{section}			% Figurenumbering: section.fig#
-\numberwithin{table}{section}				% Tablenumbering: section.tab#
+\numberwithin{equation}{section}% Equationnumbering: section.eq#
+\numberwithin{figure}{section}% Figurenumbering: section.fig#
+\numberwithin{table}{section}% Tablenumbering: section.tab#
 
 %%% Maketitle metadata
 %\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} 	% Horizontal rule
