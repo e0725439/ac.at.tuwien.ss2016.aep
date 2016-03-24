@@ -3,17 +3,28 @@ Clemens \& Flo will be here!
 
 The double sided matching problem...
 
-The stable matching problem refers to the problem of finding a matching between two sets of elements which may be equally sized. In \cite[p. 9]{gale62a} this problem is firstly described based on an example of college admission: a college is considering a set of $n$ applicants of which it can admin only a quota of $q$.
+The stable matching problem refers to the problem of finding a matching between two sets of elements which may be equally sized.
+In \cite[p. 9]{gale62a} this problem is firstly described based on an example of college admission: a college is considering a set of $n$ applicants of which it can admin only a quota of $q$.
 
-The assignment of students and colleges is not allowed to be unstable, i.e.\ there are two applicants $\alpha$ and $\beta$ who are assigned to colleges $A$ and $B$ although $\beta$ prefers $A$ to $B$ and $A$ prefers $\alpha$ to $\beta$. If this does not occur, the assignment is called \textit{stable}. In case there is more than one stable solution the \textit{optimal} one is of particular interest. In the previously mentioned college example a stable assignment is called \textit{optimal} if every applicant is at least well off as it would be under any other stable assignment \cite[p. 10]{gale62a}. In Economics this is also known as pareto efficiency \cite[p. 46]{9780199297818}.
+The assignment of students and colleges is not allowed to be unstable, i.e.\ there are two applicants $\alpha$ and $\beta$ who are assigned to colleges $A$ and $B$ although $\beta$ prefers $A$ to $B$ and $A$ prefers $\alpha$ to $\beta$.
+If this does not occur, the assignment is called \textit{stable}.
+In case there is more than one stable solution the \textit{optimal} one is of particular interest.
+In the previously mentioned college example a stable assignment is called \textit{optimal} if every applicant is at least well off as it would be under any other stable assignment \cite[p. 10]{gale62a}.
+In Economics this is also known as pareto efficiency \cite[p. 46]{9780199297818}.
 
 \subsection{Gale and Shapley Algorithm}
 Clemens \& Flo will be here!
 
 \subsection{Relevance to Game Theory}
 ...work in progress...
+
 \subsubsection{General}
-"Game theory is about what happens when people - or genes, or nations - interact". An important aspect for participating parties is to anticipate how the opposite party will react on certain actions. Mathematics shall help to analyze, understand and estimate outcomes of such games. Depending on the information participants have, they choose how to act basing on rules contained in their strategy. Game theory is widely applied in economics. Companies use game theory to estimate e.g. reactions of competitors or behavior of employees. The major advantages of game theory are its precision and that it can be applied to analyze all kind of games. \cite[p. 1ff]{camerer2003behavioral}
+"Game theory is about what happens when people - or genes, or nations - interact".
+An important aspect for participating parties is to anticipate how the opposite party will react on certain actions.
+Mathematics shall help to analyze, understand and estimate outcomes of such games. Depending on the information participants have, they choose how to act basing on rules contained in their strategy.
+Game theory is widely applied in economics.
+Companies use game theory to estimate e.g. reactions of competitors or behavior of employees.
+The major advantages of game theory are its precision and that it can be applied to analyze all kind of games. \cite[p. 1ff]{camerer2003behavioral}
 
 In addition there are some assumptions which are made during preparation and execution by every individual who are interacting together \cite {gibbons1997gametheory}
 \begin{itemize}
@@ -24,7 +35,8 @@ In addition there are some assumptions which are made during preparation and exe
 	\item Rationality 
 \end{itemize}
 
-These perfect preconditions will never be met in real scenarios. But furthermore, as a consequence of these listed assumptions above, there are two different kind of games:
+These perfect preconditions will never be met in real scenarios.
+But furthermore, as a consequence of these listed assumptions above, there are two different kind of games:
 
 \begin{itemize}
 	\item Static ones and
@@ -43,7 +55,16 @@ The two items can be combined with the following kind of knowledge
 
 \subsubsection{Double Sided Matching Problem and Game Theory}
 
-Like described in chapter XXX, the goal of the three main problems, which will be simulated in the course of this project, is to bring two different parties together. However, a requirement is that the matching of these parties is stable. In the original marriage problem discussed by Shapley the goal was to match men and women so the overall situation is stable. Stability in this case means that these men and women are in a better situation after the matching than they were before alone. 
-This idea can also be expanded to other areas like the labour market or university applications. In each of these three problems the parties need to have a strategy how to react to moves of the counterparty. If, for example, a university offers a place to a student and this is not the student's favorite university,  he/she has to decide whether to accept the place (to be on the safe side) or still hope to get accepted from the favorite university (and maybe accept to be on the waiting list there). Not only the student needs to have a strategy how to deal with these situations but also universities have to incorporate different reactions of students into their application process (e.g. how many students will be invited). \cite {gale62a}
+Like described in chapter XXX, the goal of the three main problems, which will be simulated in the course of this project, is to bring two different parties together.
+However, a requirement is that the matching of these parties is stable.
+In the original marriage problem discussed by Shapley the goal was to match men and women so the overall situation is stable.
+Stability in this case means that these men and women are in a better situation after the matching than they were before alone. 
+This idea can also be expanded to other areas like the labour market or university applications.
+In each of these three problems the parties need to have a strategy how to react to moves of the counterparty.
+If, for example, a university offers a place to a student and this is not the student's favorite university, he/she has to decide whether to accept the place (to be on the safe side) or still hope to get accepted from the favorite university (and maybe accept to be on the waiting list there).
+Not only the student needs to have a strategy how to deal with these situations but also universities have to incorporate different reactions of students into their application process (e.g. how many students will be invited) \cite {gale62a}.
 
-An important aspect Roth and Sotomayor mention is, that the rules of the game/matching have to be clear. The way agents are matched to each other influences the analysis of the problem. A possible rule might be that individuals like a student and university are only brought together if both parties agree to the matching. Other rules of a game might be the way one individual proposes to another, whether there exists a moderating individual and many more. \cite[p. 492]{roth1992two}
+An important aspect Roth and Sotomayor mention is, that the rules of the game/matching have to be clear.
+The way agents are matched to each other influences the analysis of the problem.
+A possible rule might be that individuals like a student and university are only brought together if both parties agree to the matching.
+Other rules of a game might be the way one individual proposes to another, whether there exists a moderating individual and many more \cite[p. 492]{roth1992two}.
