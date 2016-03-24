@@ -1,37 +1,37 @@
-This paper deals with the investigation of the double sided matching along with its application in economics. 
-\todo{Add more introduction text}
+In this paper the double sided matching problem is investigated along with a few applications in economics.
+This problem was firstly described by David Gale and Lloyd S. Shapley in 1962 \cite{gale62a} and in its simplest form is about finding a match between two sets of elements.
 
 \subsection{The problem}
-In many daily live expierences there is an hidden double sided matching.
-For example
-\todo{Find a good example}
-But we don't have the time or energy to find the perfect or optimal solution.
-Whereas in some field this could be done more easily or because this is mandatory, like in the universities in germany.
-\todo{Is this true?}
-They have an admission restriction for the students.
-Only the students with the best grandes in high school can go on the best universities in germany.
-But these universitites can only take a limited amount of students.
-\todo{Define the problem a bit better}
+In many daily live experiences there is a hidden double sided matching problem. 
+For example students usually have the opportunity to apply to a number of schools. 
+In this case students and schools have to be matched together. 
+Both have preferences which need to be taken into consideration. 
+In our everyday life we usually don't have the time to find an optimal solution (a student might not have enough time to apply to all preferred schools in his country). 
 
+In some cases these problems go by without solving them. 
+In other cases however, it is crucial to solve them, e.g. if we consider medical school graduates and open positions in hospitals. 
+Due to multiple reasons (e.g. different preferences, high number of elements in the two sets) this problem cannot be solved in linear time or intuitively.
 
 \subsection{The aim}
-The aim of the paper is to develop a prototype, which could solve the previous discussed problem and similar ones.
+The aim of this paper is to develop a prototype which can solve similar problems, like the one discussed previously.
 With this software we could solve questions like:
-What would be an optimal solution for the german students and universities?
-\todo{Add more questions}
+\begin{itemize}
+			\item What would be an optimal solution for the previously mentioned problem of medical graduate students and current open positions in hospitals.
+			\item How can this be applied to all prospective students and universities in Austria?
+			\item Is there also a solution for the current labor supply and demand in the European Union?
+			\end{itemize}
 
 \subsection{Structure}
 \todo{rework shortly before we are finished, because structure changes most time}
 \todo{add dynamic linking to chapters}
+In the second chapter a theoretical overview is provided regarding the double sided matching problem.
+We will take a closer look at the Gale and Shapley Algorithm and it's relation to game theory.
 
-The seconds chapter deals with the theory overview and background of the double sided matching problem.
-We will take a closer look at the Gale and Shapley Algorithm and what this has to do with game theory.
+The third chapter describes our prototype, which implements the previously discussed theory into practice.
 
-The third chapter descripes our prototype, which implements the previous discussed theory into practice.
+In the fourth chapter we use data from Austria with our prototype to make an statement over the college applications.
 
-In the fourth chapter we use data from Austria with our prototype to make an statment over the college applications.
+Chapter five deals deals with the labor market in the European Union, trying to match the labor demand and the labor supply.
 
-Chaper five deals deals with the labor market in the european union. Our prototype will get this data and we will discuss the results of it.
-
-In the summary we will sum up the important findings and compare the outputs of our prototype.
+Finally the most important findings and results are summarized and compared.
 
