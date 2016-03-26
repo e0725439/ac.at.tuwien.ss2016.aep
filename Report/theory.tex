@@ -40,7 +40,7 @@ If a man is not rejected he and his woman create a temporary couple (Note: after
 The third iteration is the same as the second one.
 This continues until all men are in a couple.
 If this condition is satisfied we have achieved a stable solution of the double sided matching problem.
-The stability of the solution of this algorithm has been proven by contradiction \cite[p. 12]{gale62a}.
+The stability of the solution of this algorithm has been proven by contradiction \cite{gale62a}.
 
 \subsection{Relevance to Game Theory}
 ...work in progress...
@@ -57,14 +57,14 @@ In addition there are some assumptions which are made during preparation and exe
 \begin{itemize}
 	\item Well-specified choices
 	\item Well-defined end-state
-	\item Specified payoff
+	\item Specified pay-off
 	\item Perfect knowledge
 	\item Rationality 
 \end{itemize}
 
-These perfect preconditions will never be met in real scenarios.
+These perfect preconditions will never be met in real scenarios, as a relation to the Double-Sided-Matching, well-specified-choices are good to have defined, but in this context, there might be chances to get into a nearly worst-case scenario instead.
 But furthermore, as a consequence of these listed assumptions above, there are two different kind of games:
-
+ 
 \begin{itemize}
 	\item Static ones and
 	\item Dynamic ones
@@ -74,11 +74,41 @@ The two items can be combined with the following kind of knowledge
 
 \begin{itemize}
 	\item Incomplete
-	\item Complete
+	\item Complete (there is no private information)
+\end{itemize}
+
+As a result of these different properties, four different game combinations can be made, whether the game is static or dynamic and the knowledge is incomplete or complete.
+In addition to better understanding we take only two players (of course every combination can be used for a higher amount of players):
+
+\begin{itemize}
+	\item Static and (in)complete information\\
+	As of complete information, players actions can be presented in N x M matrix.
+	Therefore all (also private) information is known to every other player, each player is able to eliminate easily the pay-off of the other players.
+	On the other hand incomplete information forces player to be uncertain about the other players actions and pay-off.
+	Furthermore there are two basic steps
+	\begin{enumerate}
+		\item Player 1 and 2 are choosing actions out of a set, they were predefined of them before.
+		\item After their actions, they receive their pay-offs.
+	\end{enumerate}
+	\item Dynamic and complete information\\
+	When basic assumptions are made on complete information, than players will create a Nash Equlibrium, otherwise it will be a one-shot game.
+	As of incomplete information leads to communicate (also misleading) to uninformed parties (closed 	private information) to under- or overestimate the others pay-offs, but indeed there are three basic steps: 
+	\begin{enumerate}
+		\item Player 1 chooses an action of his predefined set.
+		\item Player 2 observes the player 1's action and chooses based on his observation an action.
+		\item after their actions, they receive their pay-offs.
+	\end{enumerate}
 \end{itemize}
 
 
 \subsubsection{Economic Applications}
+Game theory is also very popular in the field of economics.
+Many companies primarily apply game theory to estimate the reactions of their competitors. 
+In the last auction for broadband internet frequencies in Germany, all major providers hired game theorists to win the auction for the desired frequency but don't overpay it.
+The bidding behaviour of one provider indicated the interest rate for the frequency. 
+As a consequence, other providers retained their bids for this frequency so the interested provider did not need to overpay for it. 
+The result was, that the 700-MHz frequencies were sold for the minimum bidding price. \cite{gametheoryWelt}
+
 
 \subsubsection{Double Sided Matching Problem and Game Theory}
 
