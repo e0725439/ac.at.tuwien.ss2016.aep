@@ -43,17 +43,17 @@ If this condition is satisfied we have achieved a stable solution of the double 
 The stability of the solution of this algorithm has been proven by contradiction \cite{gale62a}.
 
 \subsection{Relevance to Game Theory}
-...work in progress...
 
 \subsubsection{General}
 "Game theory is about what happens when people - or genes, or nations - interact".
 An important aspect for participating parties is to anticipate how the opposite party will react on certain actions.
-Mathematics shall help to analyse, understand and estimate outcomes of such games. Depending on the information participants have, they choose how to act basing on rules contained in their strategy.
+Mathematics shall help to analyze, understand and estimate outcomes of such games. 
+Depending on the information participants have, they decide how to act basing on rules contained in their strategy.
 Game theory is widely applied in economics.
-Companies use game theory to estimate e.g. reactions of competitors or behaviour of employees.
-The major advantages of game theory are its precision and that it can be applied to analyse all kind of games. \cite[p. 1ff]{camerer2003behavioral}
+Companies use game theory to estimate e.g. reactions of competitors or behavior of employees.
+The major advantages of game theory are its precision and its universal applicability to all kind of games. \cite[p. 1ff]{camerer2003behavioral}
 
-In addition there are some assumptions which are made during preparation and execution by every individual who are interacting together \cite {gibbons1997gametheory}
+In addition there are some assumptions which are made during preparation and execution by every individual who is interacting with another one \cite {gibbons1997gametheory}
 \begin{itemize}
 	\item Well-specified choices
 	\item Well-defined end-state
@@ -62,7 +62,9 @@ In addition there are some assumptions which are made during preparation and exe
 	\item Rationality 
 \end{itemize}
 
-These perfect preconditions will never be met in real scenarios, as a relation to the Double-Sided-Matching, well-specified-choices are good to have defined, but in this context, there might be chances to get into a nearly worst-case scenario instead.
+However, these perfect preconditions will never be met in real scenarios. 
+In the context of Double-Sided-Matching, it is from importance to have well-specified-choices defined. 
+Nevertheless, there might be chances to get into a nearly worst-case scenario instead.
 But furthermore, as a consequence of these listed assumptions above, there are two different kind of games:
  
 \begin{itemize}
@@ -77,26 +79,28 @@ The two items can be combined with the following kind of knowledge
 	\item Complete (there is no private information)
 \end{itemize}
 
-As a result of these different properties, four different game combinations can be made, whether the game is static or dynamic and the knowledge is incomplete or complete.
-In addition to better understanding we take only two players (of course every combination can be used for a higher amount of players):
+Depending on the nature of the game, whether it is static or dynamic or the knowledge is complete or incomplete, four different game combinations can be made.
+For a better understanding, following examples only consist of two players (every combination can be used for a higher amount of players too):
 
 \begin{itemize}
 	\item Static and (in)complete information\\
-	As of complete information, players actions can be presented in N x M matrix.
-	Therefore all (also private) information is known to every other player, each player is able to eliminate easily the pay-off of the other players.
-	On the other hand incomplete information forces player to be uncertain about the other players actions and pay-off.
-	Furthermore there are two basic steps
+	As of complete information, players actions can be presented in an N x M matrix.
+	Therefore all (also private) information is known to every player and each player is able to easily eliminate the pay-offs of other players.
+	On the other hand incomplete information forces players to be uncertain about the other player's actions and pay-offs.
+	Besides that, there are two basic steps
 	\begin{enumerate}
-		\item Player 1 and 2 are choosing actions out of a set, they were predefined of them before.
+		\item Player 1 and 2 are choosing actions out of a set, which were predefined by them before.
 		\item After their actions, they receive their pay-offs.
 	\end{enumerate}
 	\item Dynamic and complete information\\
-	When basic assumptions are made on complete information, than players will create a Nash Equilibrium, otherwise it will be a one-shot game.
-	As of incomplete information leads to communicate (also misleading) to uninformed parties (closed 	private information) to under- or overestimate the others pay-offs, but indeed there are three basic steps: 
+	When basic assumptions are made on complete information, players will create a Nash Equilibrium. 
+	Otherwise it will be a one-shot game.
+	\todo{can we formulate this sentence in a simpler way?}
+	As of incomplete information leads to communicate (also misleading) to uninformed parties (closed private information) to under- or overestimate the others pay-offs, but indeed there are three basic steps: 
 	\begin{enumerate}
-		\item Player 1 chooses an action of his predefined set.
-		\item Player 2 observes the player 1's action and chooses based on his observation an action.
-		\item after their actions, they receive their pay-offs.
+		\item Player 1 chooses an action out of his/her predefined set.
+		\item Player 2 observes player 1's action and chooses an action based on his/her observation.
+		\item After their actions, they receive their pay-offs.
 	\end{enumerate}
 \end{itemize}
 
@@ -104,10 +108,11 @@ In addition to better understanding we take only two players (of course every co
 \subsubsection{Examples for the application of game theory}
 Game theory is also very popular in the field of economics.
 Many companies primarily apply game theory to estimate the reactions of their competitors. 
-In the last auction for broadband internet frequencies in Germany, all major providers hired game theorists to win the auction for the desired frequency but don't overpay it.
-The bidding behavior of one provider indicated the interest rate for the frequency. 
+In the last auction for broadband internet frequencies in Germany, all major providers hired game theorists out of two reasons. 
+Firstly, they wanted to win the auction for the desired frequency and secondly, they also did not want to overpay for the frequency.
+The bidding behavior of a provider indicated the interest rate for a frequency. 
 As a consequence, other providers retained their bids for this frequency so the interested provider did not need to overpay for it. 
-The result was, that the 700-MHz frequencies were sold for the minimum bidding price. \cite{gametheoryWelt}
+The positive result for the providers was, that the 700-MHz frequencies were sold for the minimum bidding price. \cite{gametheoryWelt}
 
 Amongst many other areas, game theory can also be used in competition policy, in the management of strategic alliances or to estimate the distribution of power. 
 An example where the distribution of power is extremely important is the United Nations Security Council. 
@@ -120,16 +125,17 @@ Game theory can be used to analyze, make assumptions and create strategies for t
 
 \subsubsection{Double Sided Matching Problem and Game Theory}
 
-Like described in chapter XXX, the goal of the three main problems, which will be simulated in the course of this project, is to bring two different parties together.
+\todo{how can i reference to another chapter?}
+Like described in chapter XXX, the goal of the three main problems, which will be simulated in the course of this project, is to bring different parties together.
 However, a requirement is that the matching of these parties is stable.
-In the original marriage problem discussed by Shapley the goal was to match men and women so the overall situation is stable.
-Stability in this case means that these men and women are in a better situation after the matching than they were before alone. 
-This idea can also be expanded to other areas like the labour market or university applications.
+In the original marriage problem discussed by Shapley, the goal was to match men and women so the overall situation is stable.
+Stability in this case means, that these men and women are in a better situation after the matching than they were before. 
+This idea can also be applied to other areas like the labor market or university applications.
 In each of these three problems the parties need to have a strategy how to react to moves of the counterpart.
-If, for example, a university offers a place to a student and this is not the student's favourite university, he/she has to decide whether to accept the place (to be on the safe side) or still hope to get accepted from the favourite university (and maybe accept to be on the waiting list there).
-Not only the student needs to have a strategy how to deal with these situations but also universities have to incorporate different reactions of students into their application process (e.g. how many students will be invited) \cite{gale62a}.
+If, for example, a university offers a place to a student and this is not the student's favorite one, he/she has to decide whether to accept the place (to be on the safe side) or still hope to get accepted from the favorite university (and as a consequence accept to be on the waiting list there).
+Not only the student needs to have a strategy how to deal with these situations but also universities have to incorporate different reactions of students into their application process (e.g. how many students to invite) \cite{gale62a}.
 
 An important aspect Roth and Sotomayor mention is, that the rules of the game/matching have to be clear.
 The way agents are matched to each other influences the analysis of the problem.
 A possible rule might be that individuals like a student and university are only brought together if both parties agree to the matching.
-Other rules of a game might be the way one individual proposes to another, whether there exists a moderating individual and many more \cite[p. 492]{roth1992two}.
+Other norms of a game might contain the way an individual proposes to another one or whether there exists a moderating individual \cite[p. 492]{roth1992two}.
