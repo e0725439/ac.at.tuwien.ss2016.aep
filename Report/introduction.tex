@@ -1,36 +1,41 @@
 \label{introduction}
-In this paper the double sided matching problem is investigated along with a few applications in economics.
-This problem was firstly described by David Gale and Lloyd S. Shapley in 1962 \cite{gale62a} and in its simplest form is about finding a match between two sets of elements.
+The double sided matching is about finding a match between two sets of elements.
+The first algorithm for this problem was described by David Gale and Lloyd S. Shapley in 1962 \cite{gale62a}. 
+We investigate into this algorithm to create multiple models with different kind of economic applications.
+\todo{add one setence about something}
 
 \subsection{Motivation and Problem Description}
-In many daily live experiences there is a hidden double sided matching problem. 
+In many daily live experiences there are hidden double sided matching problems. 
 For example students usually have the opportunity to apply to a number of schools. 
 In this case students and schools have to be matched together. 
 Both have preferences which need to be taken into consideration. 
-In our everyday life we usually don't have the time to find an optimal solution (a student might not have enough time to apply to all preferred schools in his country). 
+In our everyday life we usually don't have the time to find an appropriate solution. 
 
-In some cases these problems go by without solving them. 
+In some cases these problems even go by without solving them. 
 In other cases however, it is crucial to solve them, e.g. if we consider medical school graduates and open positions in hospitals. 
 Due to multiple reasons (e.g. different preferences, high number of elements in the two sets) this problem cannot be solved in linear time or intuitively.
 
 \subsection{Aim and Objectives}
-The aim of this paper is to develop a prototype which can solve similar problems, like the one discussed previously.
-With this software we could answer questions like:
+The aim of this paper is to develop a prototype which can solve similar problems, like the ones discussed previously.
+With this models we could answer questions like:
 \begin{itemize}
-			\item What would be an optimal solution for the previously mentioned problem of medical graduate students and current open positions in hospitals.
-			\item How can this be applied to all prospective students and universities in Austria?
-			\item Is there also a solution for the current labor supply and demand in the European Union?
-			\end{itemize}
+	\item Are there "stable" solutions for this kind of problem?
+	\item How can this be applied to all prospective students and universities in Austria?
+	\item Is there also a solution for the current labor supply and demand in the European Union?
+\end{itemize}
 
 \subsection{Structure}
 \todo{rework shortly before we are finished, because structure changes most time}
-In the \hyperref[theory]{second chapter} a theoretical overview is provided regarding the double sided matching problem.
-We will take a closer look at the Gale and Shapley Algorithm and it's relation to game theory.
+In the \hyperref[theory]{second chapter} a theoretical overview is provided regarding the double sided matching problem and what stability means in this context.
+We will take a closer look at the Gale and Shapley Algorithm, basic information about the game theory and the relationship between them.
 
-The \hyperref[prototype]{third chapter} describes our prototype, which implements the previously discussed theory into practice.
+The \hyperref[prototype]{third chapter} describes our prototyped model, which implements the previously discussed theory into practice. 
+Therefore we use Netlogo to create a program which solves our tasks.
 
-In the \hyperref[evaluation_students]{fourth chapter} we use data from Austria with our prototype to make an statement over the college applications.
+In the \hyperref[evaluation_students]{fourth chapter} we investigate into the data from ausrian universities with our prototype. 
+As a result, we provide a solution for this double sided matching problem.
 
-\hyperref[evaluation_labor]{Chapter five} deals deals with the labor market in the European Union, trying to match the labor demand and the labor supply.
+\hyperref[evaluation_labor]{Chapter five} deals with the labor market in the European Union, trying to match the labor demand and labor supply. 
 
-Finally the most important findings and results are summarized and compared in \hyperref[summary]{summary chapter}.
+Finally the most important findings and results are summarized and compared in the \hyperref[summary]{last chapter}.
+Additionaly there is a short outlook into further research.
