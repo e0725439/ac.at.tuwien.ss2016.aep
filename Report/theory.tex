@@ -2,46 +2,46 @@
 \subsection{The Double Sided Matching Problem}
 The double sided matching problem describes a problem, which has two sets of elements.
 These sets are disjoint and may be equal in size, but this is not mandatory.
-The job of the double sided matching algorithm is to find a solution, that every element of the first set has a corresponding counterpart in the other set. This can be best described in an example:
+The purpose of the double sided matching algorithm is to find a solution, so every element of the first set has a corresponding counterpart in the other set. This can be best described in an example:
 Assume that the elements are men and women and that there are only heterosexuals preferences for the individuals.
 The two sets are now male and female.
-The double sided matching algorithm has to create couples, which consists of a man and woman.
+The double sided matching algorithm shall create couples, which consists of a man and woman.
 
-This solutions of the matchings can have some properties, which might be very important (e.g. stability).
+The solutions of the matchings can have different properties, which might be very important (e.g. stability).
 The output of the algorithm of men and women is not allowed to be unstable, i.e.\ there are two men $\alpha$ and $\beta$ who are assigned to women $A$ and $B$ although $\beta$ prefers $A$ to $B$ and $A$ prefers $\alpha$ to $\beta$.
 If this does not occur, the assignment is called \textit{stable}.
 If there is more than one stable solution the \textit{optimal} one can be of particular interest.\\ 
-Optimality means that a solution has the best outcome for a individual or set.
+Optimality means that a solution has the best outcome for an individual or set.
 In this case optimality can be achieved from the perspective of the first set of elements or from the second set.
 There can also be a trade-off from the perspective of the both sets, it this case optimality is achieved by weighting the expected value of both sets.
 These properties have been described in the paper by Gale and Shapley \cite{gale62a}.\\
 Generally in economics this is also known as pareto efficiency \cite[p. 46]{9780199297818}. 
-This is a property of a solution where any change which would improve one property on one hand, will decrease another one on the other hand.
+Pareto efficiency is a characteristic for a solution where any change which would improve one property on one hand, but will worsen another one on the other hand.
 
 
 \subsection{Gale and Shapley Algorithm}
 
 In the paper of Gale and Shapley \cite{gale62a} an algorithm was proposed for solving the double sided matching problem.
 Lets assume there are two sets of elements: one contains men and the other one women.
-The size of the two sets is equal and the preferences are heterosexual and that there is no polygamies (i.e. one element is only allowed to be matched with one element from the other set).
-The aim of the algorithm is to find stable way of marrying the men and women.
+The size of the two sets is equal, the preferences are heterosexual and there are no polygamies (i.e. one element is only allowed to be matched with one element from the other set).
+The aim of the algorithm is to find a stable way of marrying men and women.
 Each men and women has their own preference for their marriage partner.
 
 \paragraph{First Iteration\\}
-In the first iteration each man proposes to the woman which he ranked first.
+In the first iteration each man proposes to the woman who he ranked first.
 Afterwards a woman has a list of men that proposed to her. This list might be zero, if not she rejects every men, except her highest preferred man on this list.
-If a man is not rejected he and his woman create a temporary couple.
-All man which are not in a couple are single.
+If a man is not rejected he and the woman create a temporary couple.
+All man who are not in a couple are single.
 
 \paragraph{Second Iteration\\}
-In the second interaction each man which is single, proposes to his highest ranked woman, which he didn't already proposed to.
+In the second interaction each man who is single, proposes to his highest ranked woman, who he didn't already proposed to.
 Each woman now chooses the man which she ranks the highest out of her received proposals.
-If a man is not rejected he and his woman create a temporary couple (Note: after the second iteration some men, which have been in a couple from the first iteration might be now single).
+If a man is not rejected he and the woman create a temporary couple (Note: after the second iteration some men, who have been in a couple from the first iteration might be now single).
 
 \paragraph{Further Iterations\\}
 The third iteration is the same as the second one.
 This continues until no men is single anymore.
-If this condition is satisfied we have achieved a stable solution of the double sided matching problem.
+If this condition is satisfied a stable solution is found for the double sided matching problem.
 The stability of the solution of this algorithm has been proven by contradiction \cite{gale62a}.
 
 \subsection{Relevance to Game Theory}
