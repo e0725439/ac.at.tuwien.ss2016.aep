@@ -1,4 +1,5 @@
 extensions [array]
+extensions [string]
 breed [men man]
 breed [women woman]
 
@@ -29,7 +30,7 @@ csv fileList
 to setup
   clear-all
   reset-ticks
-  setup-globals  
+  setup-globals
   create-men number_people [set color red]
   create-women number_people [set color blue]
 end
@@ -40,17 +41,17 @@ to openFile
 
   while [not file-at-end?] [
     set csv file-read-line
-    set csv word csv ";"  ; add comma for loop termination 
+    set csv word csv ";"  ; add comma for loop termination
 
-    let mylist []  ; list of values 
-    while [not empty? csv] 
+    let mylist []  ; list of values
+    while [not empty? csv]
     [
-      let $x position ";" csv 
-      let $item substring csv 0 $x  ; extract item 
-      carefully [set $item read-from-string $item][] ; convert if number 
-      set mylist lput $item mylist  ; append to list 
-      set csv substring csv ($x + 1) length csv  ; remove item and comma 
-    ] 
+      let $x position ";" csv
+      let $item substring csv 0 $x  ; extract item
+      carefully [set $item read-from-string $item][] ; convert if number
+      set mylist lput $item mylist  ; append to list
+      set csv substring csv ($x + 1) length csv  ; remove item and comma
+    ]
     if item 4 mylist = 1 [
        create-men 1 [
           set id item 1 mylist
@@ -59,7 +60,7 @@ to openFile
           set side item 4 mylist
           set partnerList item 5 mylist
           set rank item 6 mylist
-
+          print string:split item 5 mylist "#"
        ]
     ] if item 4 mylist = 2 [
        create-women 1 [
@@ -68,8 +69,8 @@ to openFile
           set maxMatches item 3 mylist
           set side item 4 mylist
           set partnerList item 5 mylist
-          set rank item 6 mylist         
-       ]    
+          set rank item 6 mylist
+       ]
     ]
     set fileList lput mylist fileList
   ]
@@ -77,13 +78,13 @@ to openFile
   file-close
 end
 
-to setup-globals  
+to setup-globals
   ask men [
     set shape "person"
     set size 2
     set heading 0
   ]
-  
+
 end
 
 to go
@@ -559,7 +560,7 @@ Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
 
 @#$#@#$#@
-NetLogo 5.1.0
+NetLogo 5.3.1
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
