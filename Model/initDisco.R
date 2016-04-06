@@ -25,6 +25,7 @@ for(i in 1:length(genders)){
     #set some values for each individual
     id <- id + 1;
     individual$id <- id;
+    individual$name <- paste(c(genders[i],j), collapse="");
     individual$maxMatches <- 1;
     individual$side <- i;
     #add the individual to the discoDF
