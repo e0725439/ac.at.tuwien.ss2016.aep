@@ -44,6 +44,8 @@ for(i in 1:nrow(discoDF)){
   discoDF$partnerList[i] <- stringPartnerList;
   #make up ranks for the partnerList
   rankList <- round(runif(length(notOnMySide$id)), digits=2);
+  #order the rankList desc
+  rankList <- sort(rankList, decreasing=TRUE);
   #collapse them into a string
   stringRankList <- paste(rankList, collapse="#");
   #save this into the rank of the individual
