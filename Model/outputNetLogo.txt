@@ -1,0 +1,85 @@
+;; code part for writing result of matching to text-/csv-file
+
+;; code tested with the following ABM of the deferred acceptance algorithm
+;; in the admission process
+;; https://peerj.com/preprints/825/
+;; https://d3amtssd1tejdt.cloudfront.net/2015/825/1/Final-model-with-comments.zip
+;;   
+;; we are only interested in printing students' matches (1 match per individual)
+;; not universities' list of matches
+
+;; breed[students student]
+;; breed[colleges college]
+;; students-own [percent pref-list admit intial-pref-list age pref-acquired]
+;; colleges-own [max-seats seats-count coll-admits present-cutoff reputation]  
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Output matches   ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; write to text file
+let file "test.txt"
+file-open file
+;; record the student matches
+write-to-file
+file-close
+
+;; write to csv file
+write-csv "myfilename.csv" ["student" "match"]
+write-to-csv-file
+
+
+
+
+;; write-to-file taken from
+;; Wilensky, U. (1999). NetLogo. http://ccl.northwestern.edu/netlogo/. 
+;; Center for Connected Learning and Computer-Based Modeling, Northwestern University, Evanston, IL
+;; code from File/Models Library/Code Examples/File Output Example
+
+to write-to-file
+  file-print (word "---------- Tick Number: " ticks "-----------")
+  ;; use SORT so the turtles print their data in order by who number,
+  ;; rather than in random order
+  foreach sort students [
+    ask ? [
+      file-print (word self ": pref-acquired: " pref-acquired)
+    ]
+  ]
+  file-print ""  ;; blank line
+end
+
+to write-to-csv-file
+  foreach sort students [
+    ask ? [
+      write-csv "myfilename.csv" (list (word self) (pref-acquired))
+    ]
+  ]
+end
+    
+;; http://stackoverflow.com/questions/22462168/netlogo-export-tableau-issues
+to write-csv [ #filename #items ]
+  ;; #items is a list of the data (or headers!) to write.
+  if is-list? #items and not empty? #items
+  [ file-open #filename
+  ;; quote non-numeric items
+  set #items map quote #items
+  ;; print the items
+  ;; if only one item, print it.
+  ifelse length #items = 1 [ file-print first #items ]
+  [file-print reduce [ (word ?1 ";" ?2) ] #items]
+  ;; close-up
+  file-close
+  ]
+end
+
+;; http://stackoverflow.com/questions/22462168/netlogo-export-tableau-issues
+to-report quote [ #thing ]
+  ifelse is-number? #thing
+  [ report #thing ]
+  [ report (word "\"" #thing "\"") ]
+end  
+
+
