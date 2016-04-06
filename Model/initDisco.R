@@ -1,10 +1,13 @@
 #' This function creates an disco dataframe and writes it into an csv file, which is seperated by ;
+#' The picky is uniformal distributed between the pickyLower and pickyUpper value
 #'
 #' @param seed The seed for the number generator (default: 123)
-#' @param NumberOfMen the number of men which should be created (default: 10) 
-#' @param NumberOfWomen the number of Women, which should be created (default: 10)
+#' @param numberOfMen the number of men which should be created (default: 10) 
+#' @param numberOfWomen the number of Women, which should be created (default: 10)
+#' @param pickyLower value between 0:1; 0 excepts every possible match; 1 excepts none (default: 0)
+#' @param pickyUpper value between 0:1; 0 excepts every possible match; 1 excepts none  (default: 0)
 #' 
-#' How to call it from command line: Rscript initDisco.R 123 10 10
+#' How to call it from command line: Rscript initDisco.R 123 10 10 0 0
 
 #Add the command Arguments into args
 args<-commandArgs(TRUE);
@@ -19,10 +22,14 @@ args<-commandArgs(TRUE);
 seed <- ifelse(is.na(args[1]), 123, args[1]);
 #Set the seed to a specific value for reproducibility
 set.seed(seed);
-#Anzahl der Männer
-numberOfMen <- ifelse(is.na(args[2]), 10, args[2]);
-#Anzahl der Frauen
-numberOfWomen <- ifelse(is.na(args[3]), 10, args[3]);
+#Number of Men which should be created
+numberOfMen <- ifelse(is.na(args[2]), 10, as.integer(args[2]));
+#Number of Women which should be created
+numberOfWomen <- ifelse(is.na(args[3]), 10, as.integer(args[3]));
+#lower picky value
+pickyLower <- ifelse(is.na(args[4]), 0, as.integer(args[4]));
+#upper picky value
+pickyUpper <- ifelse(is.na(args[5]), 0, as.integer(args[5]));
 
 #Disco Dataframe
 discoDF <- data.frame("id"=character(0), "name"=character(0), "maxMatches"=numeric(0), "side"=numeric(0), "partnerList"=character(0), "rank"=character(0), stringsAsFactors = FALSE);
@@ -59,14 +66,20 @@ for(i in 1:nrow(discoDF)){
   tmpIndividual <- discoDF[i,];
   #check which individuals are not on its side
   notOnMySide <- discoDF[discoDF$side != tmpIndividual$side,];
+  #check how picky this individual is
+  picky <- runif(n=1, min=pickyLower, max=pickyUpper);
+  #number of other potentials parter to pick
+  numberOfPicks <- round(length(notOnMySide$id)*(1-picky));
   #randomly sort the potential partner
-  partnerList <- sample(notOnMySide$id);
+  partnerList <- sample(notOnMySide$id,numberOfPicks);
+  #splice the list with the picky value
+  round(length(partnerList)*picky);
   #collapse them into a string
   stringPartnerList <- paste(partnerList, collapse="#");
   #save the string into the individual partnerList
   discoDF$partnerList[i] <- stringPartnerList;
   #make up ranks for the partnerList
-  rankList <- round(runif(length(notOnMySide$id)), digits=2);
+  rankList <- round(runif(length(partnerList)), digits=2);
   #order the rankList desc
   rankList <- sort(rankList, decreasing=TRUE);
   #collapse them into a string
