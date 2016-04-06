@@ -22,7 +22,7 @@ set.seed(seed);
 #Anzahl der Männer
 numberOfMen <- ifelse(is.na(args[2]), 10, args[2]);
 #Anzahl der Frauen
-numberOfWomen <- ifelse(is.na(args[2]), 10, args[3]);
+numberOfWomen <- ifelse(is.na(args[3]), 10, args[3]);
 
 #Disco Dataframe
 discoDF <- data.frame("id"=character(0), "name"=character(0), "maxMatches"=numeric(0), "side"=numeric(0), "partnerList"=character(0), "rank"=character(0), stringsAsFactors = FALSE);
