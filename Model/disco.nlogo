@@ -58,9 +58,8 @@ to openFile
           set name item 2 mylist
           set maxMatches item 3 mylist
           set side item 4 mylist
-          set partnerList item 5 mylist
-          set rank item 6 mylist
-          print string:split item 5 mylist "#"
+          set partnerList string:split item 5 mylist
+          set rank string:split item 6 mylist
        ]
     ] if item 4 mylist = 2 [
        create-women 1 [
@@ -68,8 +67,8 @@ to openFile
           set name item 2 mylist
           set maxMatches item 3 mylist
           set side item 4 mylist
-          set partnerList item 5 mylist
-          set rank item 6 mylist
+          set partnerList string:split item 5 mylist
+          set rank string:split item 6 mylist
        ]
     ]
     set fileList lput mylist fileList
