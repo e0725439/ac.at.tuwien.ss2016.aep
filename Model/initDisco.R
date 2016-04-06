@@ -1,15 +1,28 @@
+#' This function creates an disco dataframe and writes it into an csv file, which is seperated by ;
+#'
+#' @param seed The seed for the number generator (default: 123)
+#' @param NumberOfMen the number of men which should be created (default: 10) 
+#' @param NumberOfWomen the number of Women, which should be created (default: 10)
+#' 
+#' How to call it from command line: Rscript initDisco.R 123 10 10
+
+#Add the command Arguments into args
+args<-commandArgs(TRUE);
+
 #Install the needed packages
 #install.packages("TEST");
 #Load packages
 #library(TEST);
 
+
 #Input Parameters from NetLogo?
+seed <- ifelse(is.na(args[1]), 123, args[1]);
 #Set the seed to a specific value for reproducibility
-set.seed(123);
+set.seed(seed);
 #Anzahl der Männer
-numberOfMen <- 10;
+numberOfMen <- ifelse(is.na(args[2]), 10, args[2]);
 #Anzahl der Frauen
-numberOfWomen <- 10;
+numberOfWomen <- ifelse(is.na(args[2]), 10, args[3]);
 
 #Disco Dataframe
 discoDF <- data.frame("id"=character(0), "name"=character(0), "maxMatches"=numeric(0), "side"=numeric(0), "partnerList"=character(0), "rank"=character(0), stringsAsFactors = FALSE);
