@@ -3,6 +3,8 @@
 #Load packages
 #library(TEST);
 
+#Set the seed to a specific value for reproducibility
+set.seed(123);
 #Anzahl der Männer
 numberOfMen <- 10;
 #Anzahl der Frauen
