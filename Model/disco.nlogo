@@ -10,6 +10,8 @@ men-own [
   side
   partnerList
   rank
+  status
+  tmpWoman
 ]
 
 women-own [
@@ -19,11 +21,14 @@ women-own [
   side
   partnerList
   rank
+  status
+  tmpMan
 ]
 
 ;;global variables
 globals [
 csv fileList
+proposals
 ]
 
 ;; method which is called from the setup button
@@ -60,6 +65,8 @@ to openFile
           set side item 4 mylist
           set partnerList string:split item 5 mylist
           set rank string:split item 6 mylist
+
+          set proposals length partnerList
        ]
     ] if item 4 mylist = 2 [
        create-women 1 [
@@ -99,7 +106,32 @@ end
 
 
 to match
-
+  ask men [ set status "free" ]
+  ask women [ set status "free" ]
+  let nrFree count men with [status = "free"]
+  let iteration 0
+  while [nrFree > 0 and iteration < proposals] [
+    ask men [
+      let partner women with [id = item iteration partnerlist]
+      let me self
+      ifelse ([status] of partner = "free") [
+        set tmpWoman partner
+        ask partner [ set tmpMan self]
+      ]  [
+        ask partner  [
+          let oldPos position tmpMan partnerList
+          let newPos position me partnerList
+          if(newPos < oldPos) [
+            ask tmpMan [ set status "free"]
+            set tmpMan me
+            ask me [
+              set tmpWoman partner
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
