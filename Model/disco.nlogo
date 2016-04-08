@@ -117,6 +117,7 @@ to match
       ifelse ([status] of partner = "free") [
         set tmpWoman partner
         ask partner [ set tmpMan self]
+        set nrFree nrFree - 1
       ]  [
         ask partner  [
           let oldPos position tmpMan partnerList
@@ -131,6 +132,7 @@ to match
         ]
       ]
     ]
+    set iteration iteration + 1
   ]
 end
 @#$#@#$#@
