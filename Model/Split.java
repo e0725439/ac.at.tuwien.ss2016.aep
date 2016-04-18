@@ -10,6 +10,7 @@ import org.nlogo.api.Syntax;
 
 /*
 Extension class for splitting strings by #
+Call it via: string:split argument
 */
 public class Split extends DefaultReporter
 {
