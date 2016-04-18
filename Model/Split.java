@@ -9,7 +9,8 @@ import org.nlogo.api.LogoListBuilder;
 import org.nlogo.api.Syntax;
 
 /*
-Extension class for splitting strings by #
+Extension class for splitting strings by an argument
+Call it via: string:split argument argument
 */
 public class Split extends DefaultReporter
 {
@@ -24,12 +25,14 @@ public class Split extends DefaultReporter
         throws ExtensionException, LogoException
     {
         // take the first argument as a string which should be splitted
-        String s = args[0].getString();      
+        String line = args[0].getString();
+        // take the second argument as the splitter      
+		String splitter  = args[1].getString();
 
         // make an empty list object to hold the new list
         LogoListBuilder list = new LogoListBuilder();
         // iterate over the splitted string, as there are multiple strings
-        for ( String temp : s.split("#"))
+        for ( String temp : line.split(splitter))
         {   // add each string to the list
             list.add(temp);
         }
@@ -37,3 +40,4 @@ public class Split extends DefaultReporter
         return list.toLogoList();
     }
 }
+
