@@ -8,10 +8,11 @@ import org.nlogo.api.LogoException;
 import org.nlogo.api.LogoListBuilder;
 import org.nlogo.api.Syntax;
 
+/*
+Extension class for splitting strings by #
+*/
 public class Split extends DefaultReporter
 {
-    // take one string as input, report a list 
-    
     public Syntax getSyntax()
     {
         return Syntax.reporterSyntax(
@@ -22,19 +23,17 @@ public class Split extends DefaultReporter
     public Object report(Argument args[], Context context)
         throws ExtensionException, LogoException
     {
-        // use typesafe helper method from
-        // org.nlogo.api.Argument to access argument
-        String s = args[0].getString();
-        //String c = args[1].getString();
-        
+        // take the first argument as a string which should be splitted
+        String s = args[0].getString();      
 
         // make an empty list object to hold the new list
         LogoListBuilder list = new LogoListBuilder();
-        // add the elements of the string, one at a time, to the list
+        // iterate over the splitted string, as there are multiple strings
         for ( String temp : s.split("#"))
-        {   // use substring method to get one character from the string
+        {   // add each string to the list
             list.add(temp);
         }
+        //return a netlogo logolist
         return list.toLogoList();
     }
 }
