@@ -24,19 +24,22 @@ public class ListRank extends DefaultReporter
     public Object report(Argument args[], Context context)
         throws ExtensionException, LogoException
     {
-        // use typesafe helper method from
-        // org.nlogo.api.Argument to access argument
+		//list where position shall be found
         LogoList partnerList  = args[0].getList();
+		//list containing elements which are looked up in partnerList
 	LogoList proposedList = args[1].getList();
-        //String c = args[1].getString();
+		// new list factory
         LogoListBuilder list = new LogoListBuilder();
+		//iterate over all elements from the smaller list containing objects which shall be found in partnerlist
 	for(int i = 0;  i <= proposedList.size(); i++) {
+		//iterate over partnerlist to find element from proposedList
 		for(int j = 0; j <= partnerList.size(); j++) {
-			if(proposedList.get(i).equals(partnerList.get(j))) {
+		//if element from proposedlist found in partnerlist - add position to @param list	if(proposedList.get(i).equals(partnerList.get(j))) {
 				list.add(j);
 			}	
 		}
 	}	
+	//return list with positions 
 	return list.toLogoList();
     }
 }

@@ -20,18 +20,17 @@ public class ListDiff extends DefaultReporter
             new int[] {Syntax.StringType()}, Syntax.ListType()
         ) ;
     }
-
+	
     public Object report(Argument args[], Context context)
         throws ExtensionException, LogoException
     {
-        // use typesafe helper method from
-        // org.nlogo.api.Argument to access argument
-        LogoList partnerList  = args[0].getList();
+	//list containing partner id-s
+     LogoList partnerList  = args[0].getList();
+	//list which shall be removed from the partnerlist
 	LogoList toReduceList = args[1].getList();
-        //String c = args[1].getString();
-        
+	        
 	partnerList.removeAll(toReduceList);
-
+	//return partnerList without elements contained in toReduceList
 	return partnerList;
     }
 }
