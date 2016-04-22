@@ -35,11 +35,14 @@ to setup
   reset-ticks
   open-file ; and read initialisation data from csv file
 ;  show "after open-file"
-  show count humans
+;  show "count humans after open-file"
+;  show count humans
   setup-globals
 ;  create-humans number_people [set color red] ; TODO
+;  show "count humans"
 ;  show count humans
 ;  create-humans number_people [set color blue] ; TODO
+;  show "count humans"
 ;  show count humans
 end
 
@@ -67,8 +70,12 @@ to open-file
       set name item 2 mylist
       set maxMatchesInt item 3 mylist
       set sideInt item 4 mylist
-      set partnerList string:split-int item 5 mylist "#"
-      set rankList string:split-int item 6 mylist "#"
+      let tmpPartnerListString string:split-string item 5 mylist "#"
+      set partnerList read-from-string (word tmpPartnerListString)
+;     set partnerList string:split-int item 5 mylist "#"
+      let tmpRankListString string:split-string item 6 mylist "#"
+      set rankList read-from-string (word tmpRankListString)
+;     set rankList string:split-int item 6 mylist "#"
       set hasProposedToList []
       set gotProposedByList []
       set tmpMatchList []
@@ -76,8 +83,10 @@ to open-file
     ]
     ask humans with [who = 0] [die]     ; kill human that was initialized with header of csv
     set fileList lput mylist fileList
-  show count humans
+; show "count humans at end of open-file"
+; show count humans
   ]
+  show "fileList at end of open-file"
   show fileList
   file-close
 end
@@ -111,8 +120,11 @@ to match
   show nrActive
   while [nrActive > 0] [
     ask humans with [activeFlag = true and sideInt = startSideInt] [ ; start of proposing
+      show "partnerList"
       show partnerList
+      show "hasProposedToList"
       show hasProposedToList
+      show "list-difference partnerList hasProposedToList"
       show list-difference partnerList hasProposedToList
 
       stop
@@ -132,10 +144,19 @@ to match
 end
 
 to step
-show count humans
+show "---------------- begin of step ----------------"
+; show "count humans at begin of step"
+; show count humans
     ask humans with [activeFlag = true and sideInt = startSideInt] [ ; start of proposing
-show count humans
+; show "count humans at begin of ask humans with activeFlag=true and sideInt=startSideInt"
+; show count humans
+      show "myId"
+      show id
+      show "myName"
+      show name
+      show "partnerList"
       show partnerList
+      show "hasProposedToList"
       show hasProposedToList
       let tmpPotentialPartnersList list-difference partnerList hasProposedToList ; set-difference of partnerList \ hasProposedToList
       if length tmpPotentialPartnersList = 0 [
@@ -145,9 +166,11 @@ show count humans
       let myPreferredPartner item 0 tmpPotentialPartnersList ; most preferred partner from tmp...List
       propose-to id myPreferredPartner
     ] ; end of proposing
+    show "end of proposing"
     ask humans with [length gotProposedByList > 0 and sideInt != startSideInt] [
       reject-proposals id
     ]
+show "############### end of step ###############"
 end
 
 to clear-before-match
@@ -157,6 +180,7 @@ to clear-before-match
 end
 
 to propose-to[sender receiver]
+show "---------------- begin of propose-to ----------------"
   ask humans with [id = sender] [
     set hasProposedToList lput receiver hasProposedToList
     show "hasProposedToList"
@@ -170,43 +194,72 @@ show "female side"
       show gotProposedByList
     ]
   ]
+show "############### end of propose-to ###############"
 end
 
 to reject-proposals [tmpId]
-show count humans
+show "---------------- begin of reject-proposals ----------------"
+; show "count humans at begin of reject-proposals"
+; show count humans
   ask humans with [id = tmpId] [
+    show "gotProposedByList"
     show gotProposedByList
     show "sideInt"
     show sideInt
-    stop
-    let tmpPotentialCoupleList lput tmpMatchList gotProposedByList
+    show "maxMatchesInt"
+    show maxMatchesInt
+    let tmpPotentialCoupleList []
+    ifelse length tmpMatchList = 0 [
+      set tmpPotentialCoupleList gotProposedByList
+    ] [
+      set tmpPotentialCoupleList lput tmpMatchList gotProposedByList
+    ]
+    show "tmpPotentialCoupleList"
+    show tmpPotentialCoupleList
     if length tmpPotentialCoupleList > maxMatchesInt [
+      show "has more proposals than willing to accept"
       set tmpPotentialCoupleList order-list tmpPotentialCoupleList rankList partnerList maxMatchesInt
+      show "tmpPotentialCoupleList"
       show tmpPotentialCoupleList
       ;; ORDER LIST
       ;;cutoff
     ]
   ]
+show "############### end of reject-proposals ###############"
 end
 
 to-report order-list [listToOrder ranking partners maxMatches]
+show "---------------- begin of order-list ----------------"
   set listToOrder list-overlap listToOrder partners
   if length listToOrder > maxMatches [
     let tmpRanking list-remove listToOrder ranking
     let tmpList listToOrder
+    show "tmpList"
+    show tmpList
     set listToOrder []
     let i 0
     loop [
-      if i >= maxMatches [stop]
+      if i >= maxMatches [report listToOrder]
       let j position (max tmpRanking) tmpRanking
-      set listToOrder lput position j tmpList listToOrder
+      show "j"
+      show j
+      show "item j tmpList"
+      show item j tmpList
+    show "tmpList"
+    show tmpList
+      set listToOrder lput item j tmpList listToOrder
       set tmpRanking remove-item j tmpRanking
       set tmpList remove-item j tmpList
+      show "listToOrder"
+      show listToOrder
+      show "tmpList"
+      show tmpList
       set i i + 1
     ]
 
   ]
   report listToOrder
+show "############### end of order-list ###############"
 end
 
 to-report list-difference [fullList toRemoveList]
@@ -224,8 +277,6 @@ to-report list-remove [partialList ranking]
   ]
   report tmpList
 end
-
-;; foreach [1.1 2.2 2.6] [ show (word ? " -> " round ?) ]
 @#$#@#$#@
 GRAPHICS-WINDOW
 195
