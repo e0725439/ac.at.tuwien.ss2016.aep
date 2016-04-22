@@ -138,3 +138,22 @@ An important aspect of the game or matching is that the rules have to be clear, 
 The way agents are matched to each other influences the analysis of the problem.
 A possible rule might be that individuals like a student and university are only brought together if both parties agree to the matching.
 Other norms of a game might contain the way an individual proposes to another one or whether there exists a moderating individual \cite[p. 492]{roth1992two}.
+
+\subsubsection{Double Sided Matching Problem and Optimal Stopping}
+The double sided matching problem also relates to the optimal stopping problem. 
+The optimal stopping problem concerns itself with choosing the optimal time to stop an undertaken action and at the same time to minimize the expected costs and maximize the profit. A concrete example in this case is if a men is trying to find a women to spend the rest of his life with, when should he stop looking?
+
+A few algorithms as a possible solution for the optimal stopping problem have been presented by Christian \& Griffiths 2016 \cite{algtoliveby}. 
+For the previously mentioned example of partner looking, one algorithm proposes to invest 37\% of the time in looking and immediately after to stop looking and take the next best offer. 
+37\% is the provably optimal solution \cite[p. 2]{algtoliveby}. 
+This algorithm is recommended in the case of \textit{no-information games} (e.g. in the case of partner searching, it is hard to quantify the information, because it is hard to compare people to each other. There is no concrete criteria, one can only assume that one person is better or more suitable than another person, but not by how much) \cite[p. 18]{algtoliveby}.
+
+Another possible solution for the previously mentioned problem is to set a threshold from the beginning and to take the first option that exceeds it. 
+Christian \& Griffiths 2016 \cite{algtoliveby} recommended this approach in the case of \textit{full-information games}.
+A suitable example for this case is that of a house selling: the value of the house is known and there is also information about the state of the market, which allows to predict a range of offers. 
+In this case a threshold is set and the first offer that exceeds this threshold can be accepted.
+This example does not include waiting costs. In the case of waiting costs, they also have to be taken into account and it is recommended to decline an offer if the chance of a better offer multiplied by how much better it is compensate the waiting costs.
+
+
+
+
