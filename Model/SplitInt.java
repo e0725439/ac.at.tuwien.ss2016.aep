@@ -8,36 +8,37 @@ import org.nlogo.api.LogoException;
 import org.nlogo.api.LogoListBuilder;
 import org.nlogo.api.Syntax;
 
-/*
-Extension class for splitting strings by an argument
-Call it via: string:split argument argument
+/* splits a string into a int list by a given argument
+*  call it via split-int argument1 argument2
 */
-public class Split extends DefaultReporter
+public class SplitInt extends DefaultReporter
 {
+    // take two strings as input, report a list 
+    
     public Syntax getSyntax()
     {
         return Syntax.reporterSyntax(
-            new int[] {Syntax.StringType()}, Syntax.ListType()
+            new int[] {Syntax.StringType(), Syntax.StringType()}, Syntax.ListType()
         ) ;
     }
 
     public Object report(Argument args[], Context context)
         throws ExtensionException, LogoException
     {
-        // take the first argument as a string which should be splitted
-        String line = args[0].getString();
-        // take the second argument as the splitter      
-		String splitter  = args[1].getString();
+        // first argument is a concatenated string
+        String line  = args[0].getString();
+        // second argument is the splitter
+        String splitter  = args[1].getString();
+        
 
         // make an empty list object to hold the new list
         LogoListBuilder list = new LogoListBuilder();
-        // iterate over the splitted string, as there are multiple strings
+        // iterate over the splitted string
         for ( String temp : line.split(splitter))
-        {   // add each string to the list
-            list.add(temp);
+        {   
+            // add temp as int to the list
+            list.add(Integer.parseInt(temp));
         }
-        //return a netlogo logolist
         return list.toLogoList();
     }
 }
-
