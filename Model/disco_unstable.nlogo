@@ -2,6 +2,8 @@ extensions [array]
 extensions [string]
 breed [humans human]
 
+undirected-link-breed [ pairs pair ]
+
 ; humans are turtles (common breed)
 
 ; NetLogo is case-insensitive
@@ -25,6 +27,7 @@ globals [
   startSideInt
   switchingFlag
   debugFlag
+  person_width
 ]
 
 ;; method which is called from the setup button
@@ -100,12 +103,29 @@ to open-file
 end
 
 to setup-globals
-  set startSideInt 1
+
+  set startSideInt 2
   set debugFlag true
+  ; define starting position and start color
+  let xposMen -12 ; starting position for men
+  let xposWomen -12 ; starting position for women
   ask humans [
     set shape "person"
     set size 2
     set heading 0
+    ; positioning and color
+    if sideInt = 1 [
+      set color blue
+      set ycor -4
+      set xcor xposMen
+      set xposMen xposMen + 2
+      ]
+    if sideInt = 2 [
+      set color red
+      set ycor 4
+      set xcor xposWomen
+      set xposWomen xposWomen + 2
+      ]
   ]
 
 end
@@ -227,6 +247,8 @@ if debugFlag = true [show "---------------- begin of reject-proposals ----------
       ask humans with [id = ?] [
         set tmpMatchList  list-difference tmpMatchList lput tmpId []
         set activeFlag true
+        if sideInt = 1 [set color blue]
+        if sideInt = 2 [set color red]
       ]
     ]
   ]
@@ -242,7 +264,10 @@ if debugFlag = true [show "---------------- begin of create-tmpCouples ---------
     foreach acceptList [
       ask humans with [id = ?] [
         set tmpMatchList  list-union-set tmpMatchList lput tmpId []
+        set color yellow
+        create-pair-with myself
       ]
+      set color yellow
     ]
   ]
 if debugFlag = true [show "############### end of create-tmpCouples ###############"]
@@ -377,42 +402,42 @@ to-report list-concat-with-delim [listA delim]
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
-195
-15
-733
-318
-16
+265
+10
+794
+345
+14
 8
-16.0
+17.933333333333334
 1
 9
 1
 1
 1
 0
+0
+0
 1
-1
-1
--16
-16
+-14
+14
 -8
 8
 0
 0
-0
+1
 ticks
 30.0
 
 SLIDER
 10
-100
-217
-133
+135
+210
+168
 number_people
 number_people
 1
 100
-20
+1
 1
 1
 min between
@@ -420,24 +445,24 @@ HORIZONTAL
 
 SLIDER
 10
-140
 185
-173
+210
+218
 max-run-time
 max-run-time
 0
 600001
-150000
+0
 1000
 1
 ticks
 HORIZONTAL
 
 BUTTON
-90
-230
-165
-263
+125
+75
+210
+115
 Go
 go
 T
@@ -451,10 +476,10 @@ NIL
 1
 
 MONITOR
+125
 10
-45
-120
-90
+210
+55
 Current Time
 ticks
 3
@@ -462,10 +487,10 @@ ticks
 11
 
 BUTTON
-95
 10
-170
-43
+75
+95
+115
 Next
 step
 NIL
@@ -479,10 +504,10 @@ NIL
 1
 
 BUTTON
-5
 10
-80
-43
+10
+95
+55
 Setup
 setup
 NIL
@@ -496,10 +521,10 @@ NIL
 1
 
 BUTTON
-765
-20
-852
-53
+840
+10
+927
+43
 Export csv
 export-to-csv
 NIL
