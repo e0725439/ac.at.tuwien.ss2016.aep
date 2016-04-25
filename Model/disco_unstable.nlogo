@@ -58,31 +58,38 @@ to open-file
     set csv word csv ";"  ; add comma for loop termination
 
     let mylist []  ; list of values
+    let i 0
     while [not empty? csv]
     [
       let $x position ";" csv
-      let $item substring csv 0 $x  ; extract item
-      carefully [set $item read-from-string $item][] ; convert if number
-      set mylist lput $item mylist  ; append to list
+      if i > 0 [
+        let $item substring csv 0 $x  ; extract item
+        carefully [set $item read-from-string $item][] ; convert if number
+        set mylist lput $item mylist  ; append to list
+      ]
       set csv substring csv ($x + 1) length csv  ; remove item and comma
+      set i i + 1
     ]
+    show mylist
+    if item 0 mylist != "id"[
     create-humans 1 [
-      set id item 1 mylist
-      set name item 2 mylist
-      set maxMatchesInt item 3 mylist
-      set sideInt item 4 mylist
-      let tmpPartnerListString string:split-string item 5 mylist "#"
+      set id item 0 mylist
+      set name item 1 mylist
+      set maxMatchesInt item 2 mylist
+      set sideInt item 3 mylist
+      let tmpPartnerListString string:split-string item 4 mylist "#"
       set partnerList read-from-string (word tmpPartnerListString)
-;     set partnerList string:split-int item 5 mylist "#"
-      let tmpRankListString string:split-string item 6 mylist "#"
+;     set partnerList string:split-int item 4 mylist "#"
+      let tmpRankListString string:split-string item 5 mylist "#"
       set rankList read-from-string (word tmpRankListString)
-;     set rankList string:split-int item 6 mylist "#"
+;     set rankList string:split-int item 5 mylist "#"
       set hasProposedToList []
       set gotProposedByList []
       set tmpMatchList []
       set activeFlag true
     ]
-    ask humans with [who = 0] [die]     ; kill human that was initialized with header of csv
+    ]
+;    ask humans with [who = 0] [die]     ; kill human that was initialized with header of csv
     set fileList lput mylist fileList
 ; if debugFlag = true [show "count humans at end of open-file"]
 ; if debugFlag = true [show count humans]
@@ -189,18 +196,22 @@ if debugFlag = true [show "---------------- begin of process-proposals ---------
     ]
     if debugFlag = true [show "tmpPotentialCoupleList"]
     if debugFlag = true [show tmpPotentialCoupleList]
-    if length tmpPotentialCoupleList > maxMatchesInt [
+    let tmpRejectList []
+    let tmpCoupleList []
+    ifelse length tmpPotentialCoupleList > maxMatchesInt [
       if debugFlag = true [show "has more proposals than willing to accept"]
-      let tmpCoupleList order-list tmpPotentialCoupleList rankList partnerList maxMatchesInt
+      set tmpCoupleList order-list tmpPotentialCoupleList rankList partnerList maxMatchesInt
       if debugFlag = true [show "tmpCoupleList"]
       if debugFlag = true [show tmpCoupleList]
-      let tmpRejectList list-difference tmpPotentialCoupleList tmpCoupleList
-      if length tmpRejectList > 0 [
+      set tmpRejectList list-difference tmpPotentialCoupleList tmpCoupleList
+    ] [
+     set tmpCoupleList tmpPotentialCoupleList
+    ]
+    if length tmpRejectList > 0 [
         reject-proposals id tmpRejectList
-      ]
-      if length tmpCoupleList > 0 [
+    ]
+    if length tmpCoupleList > 0 [
         create-tmpCouples id tmpCoupleList
-      ]
     ]
   ]
 if debugFlag = true [show "############### end of process-proposals ###############"]
