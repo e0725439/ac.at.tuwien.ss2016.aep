@@ -108,11 +108,6 @@ to go
   step
 end
 
-to export-to-csv
-
-
-end
-
 
 
 to step
@@ -133,8 +128,12 @@ if debugFlag = true [show "---------------- begin of step ----------------"]
       if debugFlag = true [show hasProposedToList]
       let tmpPotentialPartnersList list-difference partnerList hasProposedToList ; set-difference of partnerList \ hasProposedToList
       if length tmpPotentialPartnersList = 0 [
-        set activeFlag false ;this human has no potential partners to propose to
+        set activeFlag false ; this human has no potential partners to propose to
         stop ; break
+      ]
+      if length tmpMatchList >= maxMatchesInt [
+        set activeFlag false ; this human has enough current matches
+        stop
       ]
       let myPreferredPartner item 0 tmpPotentialPartnersList ; most preferred partner from tmp...List
       propose-to id myPreferredPartner
@@ -143,6 +142,7 @@ if debugFlag = true [show "---------------- begin of step ----------------"]
     ask humans with [length gotProposedByList > 0 and sideInt != startSideInt] [
       process-proposals id
     ]
+  tick
 if debugFlag = true [show "############### end of step ###############"]
 end
 
@@ -215,6 +215,7 @@ if debugFlag = true [show "---------------- begin of reject-proposals ----------
     foreach rejectList [
       ask humans with [id = ?] [
         set tmpMatchList  list-difference tmpMatchList lput tmpId []
+        set activeFlag true
       ]
     ]
   ]
@@ -286,7 +287,7 @@ if debugFlag = true [show "############### begin of list-overlap  ##############
   if debugFlag = true [show listA]
   if debugFlag = true [show listB]
   if debugFlag = true [show filter [member? ? listB] listA]
-if debugFlag = true [show "############### end of list-overlap  ###############"]
+  if debugFlag = true [show "############### end of list-overlap  ###############"]
   report filter [member? ? listB] listA
 end
 
@@ -305,6 +306,63 @@ to-report get-rating-of-list [fullList partialList ranking]
     set tmpList lput item (position ? fullList) ranking tmpList
   ]
   report tmpList
+end
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Output matches   ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; write-to-file taken from
+;; Wilensky, U. (1999). NetLogo. http://ccl.northwestern.edu/netlogo/.
+;; Center for Connected Learning and Computer-Based Modeling, Northwestern University, Evanston, IL
+;; code from File/Models Library/Code Examples/File Output Example
+
+to export-to-csv
+  let myOutputFilename (word "discoStatus" ticks ".csv")
+  foreach sort humans [
+    ask ? [
+      let delimPartnerList list-concat-with-delim partnerList "#"
+      let delimRankList list-concat-with-delim rankList "#"
+      let delimHasProposedToList list-concat-with-delim hasProposedToList "#"
+      let delimGotProposedByList list-concat-with-delim gotProposedByList "#"
+      let delimTmpMatchList list-concat-with-delim tmpMatchList "#"
+      write-csv myOutputFilename (list (id) (name) (maxMatchesInt) (sideInt) (delimPartnerList) (delimRankList) (delimHasProposedToList) (delimGotProposedByList) (delimTmpMatchList) (activeFlag))
+    ]
+  ]
+end
+
+
+;; http://stackoverflow.com/questions/22462168/netlogo-export-tableau-issues
+to write-csv [ #filename #items ]
+  ;; #items is a list of the data (or headers!) to write.
+  if is-list? #items and not empty? #items
+  [ file-open #filename
+  ;; quote non-numeric items
+  set #items map quote #items
+  ;; print the items
+  ;; if only one item, print it.
+  ifelse length #items = 1 [ file-print first #items ]
+  [file-print reduce [ (word ?1 ";" ?2) ] #items]
+  ;; close-up
+  file-close
+  ]
+end
+
+;; http://stackoverflow.com/questions/22462168/netlogo-export-tableau-issues
+to-report quote [ #thing ]
+  ifelse is-number? #thing
+  [ report #thing ]
+  [ report (word "\"" #thing "\"") ]
+end
+
+;; https://groups.yahoo.com/neo/groups/netlogo-users/conversations/topics/6490
+;; intersperse listA with delim
+to-report list-concat-with-delim [listA delim]
+  if length listA > 0 [report reduce [(word ?1 delim ?2)] listA]
+  report ""
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
