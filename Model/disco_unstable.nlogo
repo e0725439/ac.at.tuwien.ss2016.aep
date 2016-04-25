@@ -24,26 +24,27 @@ globals [
   csv fileList ; fileList named csv
   startSideInt
   switchingFlag
+  debugFlag
 ]
 
 ;; method which is called from the setup button
 to setup
   clear-all
-;  show "after clear-all"
-;  show "clear-all"
-;  show count humans
+;  if debugFlag = true [show "after clear-all"]
+;  if debugFlag = true [show "clear-all"]
+;  if debugFlag = true [show count humans]
   reset-ticks
   open-file ; and read initialisation data from csv file
-;  show "after open-file"
-;  show "count humans after open-file"
-;  show count humans
+;  if debugFlag = true [show "after open-file"]
+;  if debugFlag = true [show "count humans after open-file"]
+;  if debugFlag = true [show count humans]
   setup-globals
 ;  create-humans number_people [set color red] ; TODO
-;  show "count humans"
-;  show count humans
+;  if debugFlag = true [show "count humans"]
+;  if debugFlag = true [show count humans]
 ;  create-humans number_people [set color blue] ; TODO
-;  show "count humans"
-;  show count humans
+;  if debugFlag = true [show "count humans"]
+;  if debugFlag = true [show count humans]
 end
 
 
@@ -83,16 +84,17 @@ to open-file
     ]
     ask humans with [who = 0] [die]     ; kill human that was initialized with header of csv
     set fileList lput mylist fileList
-; show "count humans at end of open-file"
-; show count humans
+; if debugFlag = true [show "count humans at end of open-file"]
+; if debugFlag = true [show count humans]
   ]
-  show "fileList at end of open-file"
-  show fileList
+  if debugFlag = true [show "fileList at end of open-file"]
+  if debugFlag = true [show fileList]
   file-close
 end
 
 to setup-globals
   set startSideInt 1
+  set debugFlag true
   ask humans [
     set shape "person"
     set size 2
@@ -102,62 +104,33 @@ to setup-globals
 end
 
 to go
-;  ifelse (ticks < max-run-time) [
-      ;tick
-      match
-  ;]
-  ;[
-  ;  stop
-  ;]
+  if count humans with [activeFlag = true and sideInt = startSideInt] = 0 [stop]
+  step
+end
+
+to export-to-csv
+
+
 end
 
 
-to match
-  clear-before-match
-  show "clear-before-match"
-  let nrActive count humans with [activeFlag = true and sideInt = startSideInt]
-  show "nrActive:"
-  show nrActive
-  while [nrActive > 0] [
-    ask humans with [activeFlag = true and sideInt = startSideInt] [ ; start of proposing
-      show "partnerList"
-      show partnerList
-      show "hasProposedToList"
-      show hasProposedToList
-      show "list-difference partnerList hasProposedToList"
-      show list-difference partnerList hasProposedToList
-
-      stop
-      ; let tmpPotentialPartnersList string:list-diff[partnerList hasProposedToList] ; set-difference of partnerList \ hasProposedToList
-      ; if length tmpPotentialPartnersList = 0 [
-      ;   set activeFlag = false ;this human has no potential partners to propose to
-      ;   stop ; break
-      ; ]
-      ; let myPreferredPartner item 0 tmpPotentialPartnersList ; most preferred partner from tmp...List
-      ; propose-to id myPreferredPartner
-    ] ; end of proposing
-    ask humans with [length gotProposedByList > 0 and sideInt != startSideInt] [
-      reject-proposals id
-    ]
-  ]
-
-end
 
 to step
-show "---------------- begin of step ----------------"
-; show "count humans at begin of step"
-; show count humans
+if debugFlag = true [show "---------------- begin of step ----------------"]
+; if debugFlag = true [show "count humans at begin of step"]
+; if debugFlag = true [show count humans]
+    clear-before-match
     ask humans with [activeFlag = true and sideInt = startSideInt] [ ; start of proposing
-; show "count humans at begin of ask humans with activeFlag=true and sideInt=startSideInt"
-; show count humans
-      show "myId"
-      show id
-      show "myName"
-      show name
-      show "partnerList"
-      show partnerList
-      show "hasProposedToList"
-      show hasProposedToList
+; if debugFlag = true [show "count humans at begin of ask humans with activeFlag=true and sideInt=startSideInt"]
+; if debugFlag = true [show count humans]
+      if debugFlag = true [show "myId"]
+      if debugFlag = true [show id]
+      if debugFlag = true [show "myName"]
+      if debugFlag = true [show name]
+      if debugFlag = true [show "partnerList"]
+      if debugFlag = true [show partnerList]
+      if debugFlag = true [show "hasProposedToList"]
+      if debugFlag = true [show hasProposedToList]
       let tmpPotentialPartnersList list-difference partnerList hasProposedToList ; set-difference of partnerList \ hasProposedToList
       if length tmpPotentialPartnersList = 0 [
         set activeFlag false ;this human has no potential partners to propose to
@@ -166,114 +139,170 @@ show "---------------- begin of step ----------------"
       let myPreferredPartner item 0 tmpPotentialPartnersList ; most preferred partner from tmp...List
       propose-to id myPreferredPartner
     ] ; end of proposing
-    show "end of proposing"
+    if debugFlag = true [show "end of proposing"]
     ask humans with [length gotProposedByList > 0 and sideInt != startSideInt] [
-      reject-proposals id
+      process-proposals id
     ]
-show "############### end of step ###############"
+if debugFlag = true [show "############### end of step ###############"]
 end
 
 to clear-before-match
   ask humans [
-    set gotProposedbyList [] ; delete gotProposedbyList (in preparation for next matching-round)
+    set gotProposedByList [] ; delete gotProposedbyList (in preparation for next matching-round)
   ]
 end
 
 to propose-to[sender receiver]
-show "---------------- begin of propose-to ----------------"
+if debugFlag = true [show "---------------- begin of propose-to ----------------"]
   ask humans with [id = sender] [
     set hasProposedToList lput receiver hasProposedToList
-    show "hasProposedToList"
-    show hasProposedToList
-show "receiver"
-show receiver
+    if debugFlag = true [show "hasProposedToList"]
+    if debugFlag = true [show hasProposedToList]
+if debugFlag = true [show "receiver"]
+if debugFlag = true [show receiver]
     ask humans with [id = receiver] [
-show "female side"
+if debugFlag = true [show "female side"]
       set gotProposedByList lput sender gotProposedByList
-      show "gotProposedByList"
-      show gotProposedByList
+      if debugFlag = true [show "gotProposedByList"]
+      if debugFlag = true [show gotProposedByList]
     ]
   ]
-show "############### end of propose-to ###############"
+if debugFlag = true [show "############### end of propose-to ###############"]
 end
 
-to reject-proposals [tmpId]
-show "---------------- begin of reject-proposals ----------------"
-; show "count humans at begin of reject-proposals"
-; show count humans
+to process-proposals [tmpId]
+if debugFlag = true [show "---------------- begin of process-proposals ----------------"]
+; if debugFlag = true [show "count humans at begin of process-proposals"]
+; if debugFlag = true [show count humans]
   ask humans with [id = tmpId] [
-    show "gotProposedByList"
-    show gotProposedByList
-    show "sideInt"
-    show sideInt
-    show "maxMatchesInt"
-    show maxMatchesInt
+    if debugFlag = true [show "gotProposedByList"]
+    if debugFlag = true [show gotProposedByList]
+    if debugFlag = true [show "sideInt"]
+    if debugFlag = true [show sideInt]
+    if debugFlag = true [show "maxMatchesInt"]
+    if debugFlag = true [show maxMatchesInt]
     let tmpPotentialCoupleList []
     ifelse length tmpMatchList = 0 [
       set tmpPotentialCoupleList gotProposedByList
     ] [
-      set tmpPotentialCoupleList lput tmpMatchList gotProposedByList
+      set tmpPotentialCoupleList list-union-set tmpMatchList gotProposedByList
     ]
-    show "tmpPotentialCoupleList"
-    show tmpPotentialCoupleList
+    if debugFlag = true [show "tmpPotentialCoupleList"]
+    if debugFlag = true [show tmpPotentialCoupleList]
     if length tmpPotentialCoupleList > maxMatchesInt [
-      show "has more proposals than willing to accept"
-      set tmpPotentialCoupleList order-list tmpPotentialCoupleList rankList partnerList maxMatchesInt
-      show "tmpPotentialCoupleList"
-      show tmpPotentialCoupleList
-      ;; ORDER LIST
-      ;;cutoff
+      if debugFlag = true [show "has more proposals than willing to accept"]
+      let tmpCoupleList order-list tmpPotentialCoupleList rankList partnerList maxMatchesInt
+      if debugFlag = true [show "tmpCoupleList"]
+      if debugFlag = true [show tmpCoupleList]
+      let tmpRejectList list-difference tmpPotentialCoupleList tmpCoupleList
+      if length tmpRejectList > 0 [
+        reject-proposals id tmpRejectList
+      ]
+      if length tmpCoupleList > 0 [
+        create-tmpCouples id tmpCoupleList
+      ]
     ]
   ]
-show "############### end of reject-proposals ###############"
+if debugFlag = true [show "############### end of process-proposals ###############"]
 end
 
+to reject-proposals [tmpId rejectList]
+if debugFlag = true [show "---------------- begin of reject-proposals ----------------"]
+  ask humans with [id = tmpId] [
+    set tmpMatchList  list-difference tmpMatchList rejectList
+    if debugFlag = true [show "tmpMatchList"]
+    if debugFlag = true [show tmpMatchList]
+    foreach rejectList [
+      ask humans with [id = ?] [
+        set tmpMatchList  list-difference tmpMatchList lput tmpId []
+      ]
+    ]
+  ]
+if debugFlag = true [show "############### end of reject-proposals ###############"]
+end
+
+to create-tmpCouples [tmpId acceptList]
+if debugFlag = true [show "---------------- begin of create-tmpCouples ----------------"]
+  ask humans with [id = tmpId] [
+    set tmpMatchList acceptList
+    if debugFlag = true [show "tmpMatchList"]
+    if debugFlag = true [show tmpMatchList]
+    foreach acceptList [
+      ask humans with [id = ?] [
+        set tmpMatchList  list-union-set tmpMatchList lput tmpId []
+      ]
+    ]
+  ]
+if debugFlag = true [show "############### end of create-tmpCouples ###############"]
+end
+
+
 to-report order-list [listToOrder ranking partners maxMatches]
-show "---------------- begin of order-list ----------------"
+if debugFlag = true [show "---------------- begin of order-list ----------------"]
   set listToOrder list-overlap listToOrder partners
+  if debugFlag = true [show "listToOrder"]
+  if debugFlag = true [show listToOrder]
   if length listToOrder > maxMatches [
-    let tmpRanking list-remove listToOrder ranking
+    let tmpRanking get-rating-of-list partnerList listToOrder ranking
+    if debugFlag = true [show "tmpRanking"]
+    if debugFlag = true [show tmpRanking]
     let tmpList listToOrder
-    show "tmpList"
-    show tmpList
+    if debugFlag = true [show "tmpList"]
+    if debugFlag = true [show tmpList]
     set listToOrder []
     let i 0
     loop [
       if i >= maxMatches [report listToOrder]
       let j position (max tmpRanking) tmpRanking
-      show "j"
-      show j
-      show "item j tmpList"
-      show item j tmpList
-    show "tmpList"
-    show tmpList
+      if debugFlag = true [show "j"]
+      if debugFlag = true [show j]
+      if debugFlag = true [show "item j tmpList"]
+      if debugFlag = true [show item j tmpList]
+    if debugFlag = true [show "tmpList"]
+    if debugFlag = true [show tmpList]
       set listToOrder lput item j tmpList listToOrder
       set tmpRanking remove-item j tmpRanking
       set tmpList remove-item j tmpList
-      show "listToOrder"
-      show listToOrder
-      show "tmpList"
-      show tmpList
+      if debugFlag = true [show "listToOrder"]
+      if debugFlag = true [show listToOrder]
+      if debugFlag = true [show "tmpList"]
+      if debugFlag = true [show tmpList]
       set i i + 1
     ]
 
   ]
   report listToOrder
-show "############### end of order-list ###############"
+if debugFlag = true [show "############### end of order-list ###############"]
 end
 
+;; symmetrical difference: fullList \ toRemoveList
 to-report list-difference [fullList toRemoveList]
   report filter [not member? ? toRemoveList] fullList
 end
 
+;; intersection of listA and listB
 to-report list-overlap [listA listB]
-  report filter [ member? ? listB] listA
+if debugFlag = true [show "############### begin of list-overlap  ###############"]
+  if debugFlag = true [show listA]
+  if debugFlag = true [show listB]
+  if debugFlag = true [show filter [member? ? listB] listA]
+if debugFlag = true [show "############### end of list-overlap  ###############"]
+  report filter [member? ? listB] listA
 end
 
-to-report list-remove [partialList ranking]
+;; union of listA and listB
+to-report list-union-set [listA listB]
+  let tmpList list-difference listB listA
+  foreach tmpList [ set listA lput ? listA]
+  report listA
+end
+
+
+;; gets ranking associated with fullList for partialList
+to-report get-rating-of-list [fullList partialList ranking]
   let tmpList []
   foreach partialList [
-    set tmpList lput item (? - 1) ranking tmpList
+    set tmpList lput item (position ? fullList) ranking tmpList
   ]
   report tmpList
 end
@@ -396,6 +425,23 @@ S
 NIL
 NIL
 1
+
+BUTTON
+765
+20
+852
+53
+Export csv
+export-to-csv
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+0
 
 @#$#@#$#@
 ## AUTHORS
