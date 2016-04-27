@@ -364,7 +364,7 @@ end
 ;; code from File/Models Library/Code Examples/File Output Example
 
 to export-to-csv
-  let myOutputFilename (word "discoStatus" ticks ".csv")
+  let myOutputFilename (word "disco" "_" starter "_" "switch" "_" ticks ".csv")
   foreach sort humans [
     ask ? [
       let delimPartnerList list-concat-with-delim partnerList "#"
