@@ -653,17 +653,6 @@ current_nr_of_rejects
 1
 11
 
-INPUTBOX
-840
-60
-1057
-120
-fileName
-NIL
-1
-0
-String
-
 SWITCH
 130
 230
@@ -676,20 +665,20 @@ switching
 -1000
 
 TEXTBOX
-845
-80
-955
-106
+30
+355
+140
+381
 defaultInputFileName:\ndisco
 11
 0.0
 1
 
 BUTTON
-850
-110
-1002
-143
+20
+395
+172
+428
 change input filename
 change-input
 NIL
