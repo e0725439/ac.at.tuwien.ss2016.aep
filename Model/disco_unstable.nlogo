@@ -103,7 +103,7 @@ end
 
 to setup-globals
 
-  ifelse starter = "Women" [set startSideInt 1] [set startSideInt 2]
+  ifelse starter = "Men" [set startSideInt 1] [set startSideInt 2]
   ; define starting position and start color
   let xposMen -12 ; starting position for men
   let xposWomen -12 ; starting position for women
