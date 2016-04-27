@@ -1,3 +1,19 @@
 \label{prototype}
-\subsection{Subsection}
-Text...
+For the simulation model Netlogo was used as a simulation tool whereas the random data was generated with R.
+In the following, the data model, the R script, the GUI and code from Netlogo will be described.
+\subsection{Data model}
+According to the problem description we defined a generic data model for every individual.
+This data model is valid for the disco example, the university and labour market example, and contains the following attributes:
+\begin{itemize}
+	\item id: unique object identifier
+	\item name: object name (e.g. male1 or female1)
+	\item maxMatchesInt: integer value representing the maximum number of matchings for this object (e.g. in the disco example each person is maximally matched with one other person)
+	\item sideInt: integer helper variable assigning an individual to one the two participant groups
+	\item partnerList: list of identifiers of the partners, ordered according to the preference of an individual
+	\item rankList: list of ranks (values between 0 and 1) for the partners from the partnerList 
+	\item hasProposedToList: list of identifiers representing the individuals to which an individual has proposed
+	\item gotProposedByList: list of identifiers representing the individuals from which an individual received proposals
+	\item tmpMatchList: list containing the identifiers of individuals to whom a temporary match was established
+	\item activeFlag: boolean value stating if an individual is matched or not respectively if the individual gave up (they already proposed to all individuals from the partnerList but only received rejections)
+\end{itemize}
+
