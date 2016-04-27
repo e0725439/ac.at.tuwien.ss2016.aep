@@ -25,7 +25,8 @@ humans-own [
 globals [
   csv fileList ; fileList named csv
   startSideInt
-  switchingFlag
+  debugFlag ;  initiated via GUI
+  switchingFlag ; initiated via GUI
   person_width
 ]
 
@@ -104,6 +105,8 @@ end
 to setup-globals
 
   ifelse starter = "Men" [set startSideInt 1] [set startSideInt 2]
+  set debugFlag debug
+  set switchingFlag switching
   ; define starting position and start color
   let xposMen -12 ; starting position for men
   let xposWomen -12 ; starting position for women
@@ -167,6 +170,12 @@ to step
   ask humans with [length gotProposedByList > 0 and sideInt != startSideInt] [
     process-proposals id
   ]
+  if debugFlag = true [show "switchingFlag"]
+  if debugFlag = true [show switchingFlag]
+  if switchingFlag = true [set startSideInt ((startSideInt + 1) mod 2)]
+  if startSideInt = 0 [set startSideInt 2]
+  if debugFlag = true [show "startSideInt"]
+  if debugFlag = true [show startSideInt]
   tick
   if debugFlag = true [show "############### end of step ###############"]
 end
@@ -538,11 +547,11 @@ NIL
 SWITCH
 10
 230
-110
+112
 263
-debugFlag
-debugFlag
-1
+debug
+debug
+0
 1
 -1000
 
@@ -554,7 +563,7 @@ CHOOSER
 starter
 starter
 "Men" "Women"
-1
+0
 
 INPUTBOX
 840
@@ -566,6 +575,17 @@ NIL
 1
 0
 String
+
+SWITCH
+130
+230
+257
+263
+switching
+switching
+0
+1
+-1000
 
 @#$#@#$#@
 ## AUTHORS
