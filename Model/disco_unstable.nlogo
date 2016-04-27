@@ -72,7 +72,7 @@ to open-file
       set csv substring csv ($x + 1) length csv  ; remove item and comma
       set i i + 1
     ]
-    show mylist
+    if debugFlag = true [show mylist]
     if item 0 mylist != "id"[
     create-humans 1 [
       set id item 0 mylist
@@ -114,13 +114,13 @@ to setup-globals
     ; positioning and color
     if sideInt = 1 [
       set color blue
-      set ycor -4
+      ifelse starter = "Men" [set ycor 4] [set ycor -4]
       set xcor xposMen
       set xposMen xposMen + 2
       ]
     if sideInt = 2 [
       set color red
-      set ycor 4
+      ifelse starter = "Women" [set ycor 4] [set ycor -4]
       set xcor xposWomen
       set xposWomen xposWomen + 2
       ]
@@ -450,7 +450,7 @@ max-run-time
 max-run-time
 0
 600001
-2000
+0
 1000
 1
 ticks
@@ -542,9 +542,19 @@ SWITCH
 263
 debugFlag
 debugFlag
-0
+1
 1
 -1000
+
+CHOOSER
+10
+275
+148
+320
+starter
+starter
+"Men" "Women"
+1
 
 @#$#@#$#@
 ## AUTHORS
