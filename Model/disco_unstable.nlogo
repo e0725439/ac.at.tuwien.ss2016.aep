@@ -26,7 +26,9 @@ globals [
   csv fileList ; fileList named csv
   startSideInt
   switchingFlag
-  person_width
+  current_nr_of_pairs
+  current_nr_of_pairs_percent
+  current_nr_of_rejects
 ]
 
 ;; method which is called from the setup button
@@ -52,7 +54,8 @@ end
 
 ;; stackoverflow.com/questions/27096948/how-to-read-a-csv-filve-with-netlogo
 to open-file
-  file-open "disco.csv"
+  ; file-open "disco.csv"
+  file-open "disco100Picky.csv"
   set fileList []
 
   while [not file-at-end?] [
@@ -102,30 +105,25 @@ to open-file
 end
 
 to setup-globals
-
+  set current_nr_of_rejects 0
   set startSideInt 2
   ; define starting position and start color
   let xposMen -12 ; starting position for men
   let xposWomen -12 ; starting position for women
   ask humans [
     set shape "person"
-    set size 2
+    set size 1
     set heading 0
     ; positioning and color
     if sideInt = 1 [
       set color blue
-      ifelse starter = "Men" [set ycor 4] [set ycor -4]
-      set xcor xposMen
-      set xposMen xposMen + 2
+      ifelse starter = "Men" [setxy random-xcor 4] [setxy random-xcor -4]
       ]
     if sideInt = 2 [
       set color red
-      ifelse starter = "Women" [set ycor 4] [set ycor -4]
-      set xcor xposWomen
-      set xposWomen xposWomen + 2
+      ifelse starter = "Women" [setxy random-xcor 4] [setxy random-xcor -4]
       ]
   ]
-
 end
 
 to go
@@ -167,8 +165,26 @@ if debugFlag = true [show "---------------- begin of step ----------------"]
     ask humans with [length gotProposedByList > 0 and sideInt != startSideInt] [
       process-proposals id
     ]
+    calc-stats
   tick
 if debugFlag = true [show "############### end of step ###############"]
+; calculate stats
+end
+
+to calc-stats
+  set current_nr_of_pairs 0
+  ask humans [
+    set current_nr_of_pairs current_nr_of_pairs + length tmpMatchList
+    ]
+  set current_nr_of_pairs current_nr_of_pairs / 2
+  let countedHumans count humans / 2
+  ifelse countedHumans = 0 [
+    set current_nr_of_pairs_percent 0
+  ] [
+    set current_nr_of_pairs_percent current_nr_of_pairs / countedHumans
+    set current_nr_of_pairs_percent current_nr_of_pairs_percent * 100
+  ]
+
 end
 
 to clear-before-match
@@ -247,6 +263,7 @@ if debugFlag = true [show "---------------- begin of reject-proposals ----------
         set activeFlag true
         if sideInt = 1 [set color blue]
         if sideInt = 2 [set color red]
+        set current_nr_of_rejects current_nr_of_rejects + 1
       ]
     ]
   ]
@@ -262,10 +279,10 @@ if debugFlag = true [show "---------------- begin of create-tmpCouples ---------
     foreach acceptList [
       ask humans with [id = ?] [
         set tmpMatchList  list-union-set tmpMatchList lput tmpId []
-        set color yellow
+        set color green
         create-pair-with myself
       ]
-      set color yellow
+      set color green
     ]
   ]
 if debugFlag = true [show "############### end of create-tmpCouples ###############"]
@@ -554,7 +571,47 @@ CHOOSER
 starter
 starter
 "Men" "Women"
+0
+
+PLOT
+840
+65
+1040
+215
+Number of Pairs (%)
+time steps
+NIL
+0.0
+10.0
+0.0
+100.0
+true
+false
+"" ""
+PENS
+"pen-0" 1.0 0 -2674135 true "" "plot current_nr_of_pairs_percent"
+
+MONITOR
+840
+230
+1040
+275
+Number of Pairs
+current_nr_of_pairs
+17
 1
+11
+
+MONITOR
+840
+295
+1040
+340
+Number of Rejections
+current_nr_of_rejects
+17
+1
+11
 
 @#$#@#$#@
 ## AUTHORS
