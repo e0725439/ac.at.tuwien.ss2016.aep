@@ -24,9 +24,11 @@ humans-own [
 ;;global variables
 globals [
   csv fileList ; fileList named csv
-  startSideInt
-  debugFlag ;  initiated via GUI
-  switchingFlag ; initiated via GUI
+  startSideInt ; set in setup-globals from GUI-slider
+  switchingFlag ; set in setup-globals from GUI-switch
+  debugFlag ; set in setup-globals from GUI-switch
+  user-input-filename ;
+  input-filename ; set default in setup-globals or from GUI-button
   person_width
 ]
 
@@ -36,24 +38,48 @@ to setup
   ;  if debugFlag = true [show "after clear-all"]
   ;  if debugFlag = true [show "clear-all"]
   ;  if debugFlag = true [show count humans]
-  reset-ticks
+  setup-globals
   open-file ; and read initialisation data from csv file
             ;  if debugFlag = true [show "after open-file"]
             ;  if debugFlag = true [show "count humans after open-file"]
             ;  if debugFlag = true [show count humans]
-  setup-globals
   ;  create-humans number_people [set color red] ; TODO
   ;  if debugFlag = true [show "count humans"]
   ;  if debugFlag = true [show count humans]
   ;  create-humans number_people [set color blue] ; TODO
   ;  if debugFlag = true [show "count humans"]
   ;  if debugFlag = true [show count humans]
+  reset-ticks
+end
+
+to reset
+  clear-ticks
+  clear-turtles
+  clear-patches
+  clear-drawing
+  clear-all-plots
+  clear-output
+  ;  if debugFlag = true [show "after clear-all"]
+  ;  if debugFlag = true [show "clear-all"]
+  ;  if debugFlag = true [show count humans]
+  setup-globals
+  open-file ; and read initialisation data from csv file
+            ;  if debugFlag = true [show "after open-file"]
+            ;  if debugFlag = true [show "count humans after open-file"]
+            ;  if debugFlag = true [show count humans]
+  ;  create-humans number_people [set color red] ; TODO
+  ;  if debugFlag = true [show "count humans"]
+  ;  if debugFlag = true [show count humans]
+  ;  create-humans number_people [set color blue] ; TODO
+  ;  if debugFlag = true [show "count humans"]
+  ;  if debugFlag = true [show count humans]
+  reset-ticks
 end
 
 
 ;; stackoverflow.com/questions/27096948/how-to-read-a-csv-filve-with-netlogo
 to open-file
-  file-open "disco.csv"
+  file-open (word input-filename ".csv")
   set fileList []
 
   while [not file-at-end?] [
@@ -103,10 +129,10 @@ to open-file
 end
 
 to setup-globals
-
   ifelse starter = "Men" [set startSideInt 1] [set startSideInt 2]
   set debugFlag debug
   set switchingFlag switching
+  ifelse user-input-filename = 0 [set input-filename "disco"] [set input-filename user-input-filename]
   ; define starting position and start color
   let xposMen -12 ; starting position for men
   let xposWomen -12 ; starting position for women
@@ -354,6 +380,19 @@ end
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Input filename   ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;
+
+to change-input
+  set user-input-filename user-input "Type input filename (without extension)."
+  if debugFlag = true [show "user-input-filename"]
+  if debugFlag = true [show user-input-filename]
+end
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Output matches   ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -364,7 +403,7 @@ end
 ;; code from File/Models Library/Code Examples/File Output Example
 
 to export-to-csv
-  let myOutputFilename (word "disco" "_" starter "_" "switch" "_" ticks ".csv")
+  let output-filename (word input-filename "_Starter_" starter "_Switch_" switching "_Ticks_" ticks ".csv")
   foreach sort humans [
     ask ? [
       let delimPartnerList list-concat-with-delim partnerList "#"
@@ -372,7 +411,7 @@ to export-to-csv
       let delimHasProposedToList list-concat-with-delim hasProposedToList "#"
       let delimGotProposedByList list-concat-with-delim gotProposedByList "#"
       let delimTmpMatchList list-concat-with-delim tmpMatchList "#"
-      write-csv myOutputFilename (list (id) (name) (maxMatchesInt) (sideInt) (delimPartnerList) (delimRankList) (delimHasProposedToList) (delimGotProposedByList) (delimTmpMatchList) (activeFlag))
+      write-csv output-filename (list (id) (name) (maxMatchesInt) (sideInt) (delimPartnerList) (delimRankList) (delimHasProposedToList) (delimGotProposedByList) (delimTmpMatchList) (activeFlag))
     ]
   ]
 end
@@ -482,17 +521,6 @@ NIL
 NIL
 1
 
-MONITOR
-125
-10
-210
-55
-Current Time
-ticks
-3
-1
-11
-
 BUTTON
 10
 75
@@ -551,7 +579,7 @@ SWITCH
 263
 debug
 debug
-0
+1
 1
 -1000
 
@@ -565,17 +593,6 @@ starter
 "Men" "Women"
 0
 
-INPUTBOX
-840
-60
-1057
-120
-fileName
-NIL
-1
-0
-String
-
 SWITCH
 130
 230
@@ -583,9 +600,64 @@ SWITCH
 263
 switching
 switching
-0
+1
 1
 -1000
+
+TEXTBOX
+845
+80
+955
+106
+defaultInputFileName:\ndisco
+11
+0.0
+1
+
+BUTTON
+850
+110
+1002
+143
+change input filename
+change-input
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+BUTTON
+125
+15
+187
+48
+Reset
+reset
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+MONITOR
+145
+270
+227
+315
+Current Ticks
+ticks
+0
+1
+11
 
 @#$#@#$#@
 ## AUTHORS
