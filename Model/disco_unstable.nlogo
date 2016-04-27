@@ -29,7 +29,9 @@ globals [
   debugFlag ; set in setup-globals from GUI-switch
   user-input-filename ;
   input-filename ; set default in setup-globals or from GUI-button
-  person_width
+  current_nr_of_pairs
+  current_nr_of_pairs_percent
+  current_nr_of_rejects
 ]
 
 ;; method which is called from the setup button
@@ -133,12 +135,14 @@ to setup-globals
   set debugFlag debug
   set switchingFlag switching
   ifelse user-input-filename = 0 [set input-filename "disco"] [set input-filename user-input-filename]
+  set current_nr_of_rejects 0
+
   ; define starting position and start color
   let xposMen -12 ; starting position for men
   let xposWomen -12 ; starting position for women
   ask humans [
     set shape "person"
-    set size 2
+    set size 1
     set heading 0
     ; positioning and color
     if sideInt = 1 [
@@ -154,7 +158,6 @@ to setup-globals
       set xposWomen xposWomen + 2
     ]
   ]
-
 end
 
 to go
@@ -189,6 +192,7 @@ to step
       set activeFlag false ; this human has enough current matches
       stop
     ]
+    calc-stats
     let myPreferredPartner item 0 tmpPotentialPartnersList ; most preferred partner from tmp...List
     propose-to id myPreferredPartner
   ] ; end of proposing
@@ -204,6 +208,21 @@ to step
   if debugFlag = true [show startSideInt]
   tick
   if debugFlag = true [show "############### end of step ###############"]
+end
+
+to calc-stats
+  set current_nr_of_pairs 0
+  ask humans [
+    set current_nr_of_pairs current_nr_of_pairs + length tmpMatchList
+    ]
+  set current_nr_of_pairs current_nr_of_pairs / 2
+  let countedHumans count humans / 2
+  ifelse countedHumans = 0 [
+    set current_nr_of_pairs_percent 0
+  ] [
+    set current_nr_of_pairs_percent current_nr_of_pairs / countedHumans
+    set current_nr_of_pairs_percent current_nr_of_pairs_percent * 100
+  ]
 end
 
 to clear-before-match
@@ -282,6 +301,7 @@ to reject-proposals [tmpId rejectList]
         set activeFlag true
         if sideInt = 1 [set color blue]
         if sideInt = 2 [set color red]
+        set current_nr_of_rejects current_nr_of_rejects + 1
       ]
     ]
   ]
@@ -297,10 +317,10 @@ to create-tmpCouples [tmpId acceptList]
     foreach acceptList [
       ask humans with [id = ?] [
         set tmpMatchList  list-union-set tmpMatchList lput tmpId []
-        set color yellow
+        set color green
         create-pair-with myself
       ]
-      set color yellow
+      set color green
     ]
   ]
   if debugFlag = true [show "############### end of create-tmpCouples ###############"]
@@ -592,6 +612,57 @@ starter
 starter
 "Men" "Women"
 0
+
+PLOT
+840
+65
+1040
+215
+Number of Pairs (%)
+time steps
+NIL
+0.0
+10.0
+0.0
+100.0
+true
+false
+"" ""
+PENS
+"pen-0" 1.0 0 -2674135 true "" "plot current_nr_of_pairs_percent"
+
+MONITOR
+840
+230
+1040
+275
+Number of Pairs
+current_nr_of_pairs
+17
+1
+11
+
+MONITOR
+840
+295
+1040
+340
+Number of Rejections
+current_nr_of_rejects
+17
+1
+11
+
+INPUTBOX
+840
+60
+1057
+120
+fileName
+NIL
+1
+0
+String
 
 SWITCH
 130
