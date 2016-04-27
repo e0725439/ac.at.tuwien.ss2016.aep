@@ -26,7 +26,6 @@ globals [
   csv fileList ; fileList named csv
   startSideInt
   switchingFlag
-  debugFlag
   person_width
 ]
 
@@ -105,7 +104,6 @@ end
 to setup-globals
 
   set startSideInt 2
-  set debugFlag true
   ; define starting position and start color
   let xposMen -12 ; starting position for men
   let xposWomen -12 ; starting position for women
@@ -404,7 +402,7 @@ end
 GRAPHICS-WINDOW
 265
 10
-794
+795
 345
 14
 8
@@ -452,7 +450,7 @@ max-run-time
 max-run-time
 0
 600001
-0
+2000
 1000
 1
 ticks
@@ -536,6 +534,17 @@ NIL
 NIL
 NIL
 0
+
+SWITCH
+10
+230
+122
+263
+debugFlag
+debugFlag
+0
+1
+-1000
 
 @#$#@#$#@
 ## AUTHORS
