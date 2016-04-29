@@ -453,9 +453,6 @@ to write-csv [ #filename #items ]
 end
 
 to remove-link [human1 human2]
-  show "remove-link"
-  show human1
-  show human2
   ask links with [(end1 = human1 and end2 = human2) or (end1 = human2 and end2 = human1)] [
     show "works"
     die]
