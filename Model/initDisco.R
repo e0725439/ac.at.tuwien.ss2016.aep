@@ -1,5 +1,5 @@
 #' This function creates an disco dataframe and writes it into an csv file, which is seperated by ;
-#' The picky is uniformal distributed between the pickyLower and pickyUpper value
+#' The picky is uniformly distributed between the pickyLower and pickyUpper value
 #'
 #' @param seed The seed for the number generator (default: 123)
 #' @param numberOfMen the number of men which should be created (default: 10) 
