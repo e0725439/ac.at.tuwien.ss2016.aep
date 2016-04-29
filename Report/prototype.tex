@@ -54,15 +54,15 @@ The GUI was structured in two main parts - the control and the information secti
     \includegraphics[width=0.5\textwidth]{netlogo-controls}
 \end{figure}
 Figure~\ref{fig:control-disco-gui} shows the control section in the GUI. 
-With the buttons Setup and Reset the simulation model can be initialized or reset after a simulation run.
-The button Next advises the program to perform one simulation step, if Go is activated the simulation continues a termination criterion is met.
+With the buttons \textbf{Setup} and \textbf{Reset} the simulation model can be initialized or reset after a simulation run.
+The button \textbf{Next} advises the program to perform one simulation step, if \textbf{Go} is activated the simulation continues til a termination criterion is met.
 In the disco example the main termination criterion is if every every proposing person is already matched to another person. 
 Another criterion for termination is if the proposing person already proposed to every person in his partnerList but got rejected every time.
-The debug-switch enables or disables debug messages which are printed during the simulation run.
-The speed of a simulation run can be increased if the debug-switch is set to Off.
-The second switch, switching, controls, if the two parties propose to each other alternatively (On) or if only one party proposes to the other one (Off).
-With the drop-down list starter the user can determine which party starts proposing.
-The reporting box Current Ticks shows the current number of simulation steps.
+The \textbf{debug} switch enables or disables debug messages which are printed during the setup phase and simulation run.
+The speed of a simulation run can be increased if the \textbf{debug} switch is set to Off.
+The second switch, \textbf{switching}, controls, if the two parties propose to each other alternatively (On) or if only one party proposes to the other one (Off).
+With the drop-down list \textbf{starter} the user can determine which party starts proposing.
+The reporting box \textbf{Current Ticks} shows the current number of simulation steps.
 The button change input filename raises a dialogue box where the user can enter the filename of an input file which shall be used in the simulation.
 Together with the number of ticks the filename will also be used as the name for the CSV export file.
 \begin{figure}[H]
@@ -77,11 +77,11 @@ Men are coloured blue and women are red.
 On setup of the simulation the proposing site is shown in the top row. 
 As soon as two people are matched their colour changes to green and a link between the two is established.
 If a couple is divorced the link is removed and the colour changes back to the original one.
-The plot named Number of Pairs (\%) illustrates at each point in time how many of the possible couples exist. 
+The plot named \textbf{Number of Pairs (\%)} illustrates at each point in time how many of the possible couples exist. 
 If the simulation contains 10 men and women and currently 4 couples exist, the plot shows that 40\% are matched.
-The reporting box Number of Pairs shows the absolute number of couples.
-The other reporting box, Number of Rejections, indicates how many couples were divorced over time.
-With the button Export csv the current properties of all humans are exported to a csv file.
-The filename is a combination of the input filename and the current number of ticks.
+The reporting box \textbf{Number of Pairs} shows the absolute number of couples.
+The other reporting box, \textbf{Number of Rejections}, indicates how many couples were divorced over time.
+With the button \textbf{Export csv} the current properties of all humans are exported to a csv file.
+The filename is a combination of the input filename, the starting side, if the switching is activated and the current number of ticks.
 
 \subsection{Netlogo code}
