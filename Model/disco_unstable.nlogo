@@ -136,6 +136,8 @@ to setup-globals
   set switchingFlag switching
   ifelse user-input-filename = 0 [set input-filename "disco"] [set input-filename user-input-filename]
   set current_nr_of_rejects 0
+  set current_nr_of_pairs 0
+  set current_nr_of_pairs_percent 0
 
   ; define starting position and start color
   let xposMen -12 ; starting position for men
@@ -161,7 +163,7 @@ to setup-globals
 end
 
 to go
-  if count humans with [activeFlag = true and sideInt = startSideInt] = 0 [stop]
+  if count humans with [activeFlag = true and (sideInt = startSideInt or switchingFlag = true)] = 0 [stop]
   step
 end
 
@@ -192,7 +194,6 @@ to step
       set activeFlag false ; this human has enough current matches
       stop
     ]
-    calc-stats
     let myPreferredPartner item 0 tmpPotentialPartnersList ; most preferred partner from tmp...List
     propose-to id myPreferredPartner
   ] ; end of proposing
@@ -206,22 +207,26 @@ to step
   if startSideInt = 0 [set startSideInt 2]
   if debugFlag = true [show "startSideInt"]
   if debugFlag = true [show startSideInt]
+  calc-stats
   tick
   if debugFlag = true [show "############### end of step ###############"]
 end
 
 to calc-stats
   set current_nr_of_pairs 0
-  ask humans [
-    set current_nr_of_pairs current_nr_of_pairs + length tmpMatchList
+  ask humans with [sideInt = startSideInt] [
+    if length tmpMatchList = maxMatchesInt [
+       set current_nr_of_pairs current_nr_of_pairs + 1
     ]
-  set current_nr_of_pairs current_nr_of_pairs / 2
-  let countedHumans count humans / 2
+  ]
+ show current_nr_of_pairs
+ let countedHumans count humans with [sideInt = startSideInt]
   ifelse countedHumans = 0 [
     set current_nr_of_pairs_percent 0
   ] [
     set current_nr_of_pairs_percent current_nr_of_pairs / countedHumans
     set current_nr_of_pairs_percent current_nr_of_pairs_percent * 100
+    if current_nr_of_pairs = 0 [set current_nr_of_pairs_percent 0]
   ]
 end
 
@@ -660,7 +665,7 @@ SWITCH
 263
 switching
 switching
-1
+0
 1
 -1000
 
