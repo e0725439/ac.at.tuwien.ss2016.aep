@@ -124,28 +124,37 @@ to setup-globals
   set current_nr_of_rejects 0
   set current_nr_of_pairs 0
   set current_nr_of_pairs_percent 0
+  let current_world_width world-width
 
   open-file ; and read initialisation data from csv file
   ; define starting position and start color
-  let xposMen -12 ; starting position for men
-  let xposWomen -12 ; starting position for women
-  ask humans [
+  let number_women count humans with [sideInt = 2]
+  let xposHumansStart current_world_width / 2 ; starting position for humans
+  let i 1
+  ask humans with [sideInt = startSideInt] [
+    let number_starting count humans with [sideInt = startSideInt]
     set shape "person"
     set size 1
     set heading 0
     ; positioning and color
-    if sideInt = 1 [
-      set color blue
-      ifelse starter = "Men" [set ycor 4] [set ycor -4]
-      set xcor xposMen
-      set xposMen xposMen + 2
-    ]
-    if sideInt = 2 [
-      set color red
-      ifelse starter = "Women" [set ycor 4] [set ycor -4]
-      set xcor xposWomen
-      set xposWomen xposWomen + 2
-    ]
+    set ycor 4
+    ifelse sideInt = 1 [set color blue] [set color red]
+    let xposHumans i / (number_starting + 1) * current_world_width - xposHumansStart
+    set xcor xposHumans
+    set i i + 1
+  ]
+  set i 1
+  ask humans with [sideInt != startSideInt] [
+    let number_notstarting count humans with [sideInt != startSideInt]
+    set shape "person"
+    set size 1
+    set heading 0
+    ; positioning and color
+    set ycor -4
+    ifelse sideInt = 1 [set color blue] [set color red]
+    let xposHumans i / (number_notstarting + 1) * current_world_width - xposHumansStart
+    set xcor xposHumans
+    set i i + 1
   ]
 end
 
@@ -602,7 +611,7 @@ SWITCH
 263
 debug
 debug
-1
+0
 1
 -1000
 
