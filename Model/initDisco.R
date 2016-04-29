@@ -1,11 +1,11 @@
 #' This function creates an disco dataframe and writes it into an csv file, which is seperated by ;
-#' The picky is uniformal distributed between the pickyLower and pickyUpper value
+#' The picky is uniformly distributed between the pickyLower and pickyUpper value
 #'
 #' @param seed The seed for the number generator (default: 123)
 #' @param numberOfMen the number of men which should be created (default: 10) 
 #' @param numberOfWomen the number of Women, which should be created (default: 10)
-#' @param pickyLower value between 0:1; 0 excepts every possible match; 1 excepts none (default: 0)
-#' @param pickyUpper value between 0:1; 0 excepts every possible match; 1 excepts none  (default: 0)
+#' @param pickyLower value between 0:1; 0 accepts every possible match; 1 accepts none (default: 0)
+#' @param pickyUpper value between 0:1; 0 accepts every possible match; 1 accepts none  (default: 0)
 #' 
 #' How to call it from command line: Rscript initDisco.R 123 10 10 0 0
 

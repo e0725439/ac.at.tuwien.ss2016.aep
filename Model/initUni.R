@@ -1,13 +1,13 @@
 #' This function creates an uni dataframe and writes it into an csv file, which is seperated by ;
-#' The picky is uniformal distributed between the pickyLower and pickyUpper value
+#' The picky is uniformly distributed between the pickyLower and pickyUpper value
 #'
 #' @param seed The seed for the number generator (default: 123)
 #' @param numberOfStudents the number of students which should be created (default: 1000) 
 #' @param numberOfUniversities the number of Universities, which should be created (default: 4)
 #' @param namesOfUniversities (List) the list of the names Universities, which should be created
 #' @param collegeCapacity (List) the list of the capacitiers of the universities
-#' @param pickyLower value between 0:1; 0 excepts every possible match; 1 excepts none (default: 0)
-#' @param pickyUpper value between 0:1; 0 excepts every possible match; 1 excepts none  (default: 0)
+#' @param pickyLower value between 0:1; 0 accepts every possible match; 1 accepts none (default: 0)
+#' @param pickyUpper value between 0:1; 0 accepts every possible match; 1 accepts none  (default: 0)
 #' 
 #' How to call it from command line: Rscript initUni.R 123 10 10 0 0
 
