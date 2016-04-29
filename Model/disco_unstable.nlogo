@@ -37,20 +37,15 @@ globals [
 ;; method which is called from the setup button
 to setup
   clear-all
-  ;  if debugFlag = true [show "after clear-all"]
-  ;  if debugFlag = true [show "clear-all"]
-  ;  if debugFlag = true [show count humans]
+  if debugFlag = true [
+    show "after clear-all"
+    show "clear-all"
+    show count humans]
   setup-globals
   open-file ; and read initialisation data from csv file
-            ;  if debugFlag = true [show "after open-file"]
-            ;  if debugFlag = true [show "count humans after open-file"]
-            ;  if debugFlag = true [show count humans]
-  ;  create-humans number_people [set color red] ; TODO
-  ;  if debugFlag = true [show "count humans"]
-  ;  if debugFlag = true [show count humans]
-  ;  create-humans number_people [set color blue] ; TODO
-  ;  if debugFlag = true [show "count humans"]
-  ;  if debugFlag = true [show count humans]
+  if debugFlag = true [show "after open-file"
+     show "count humans after open-file"
+     show count humans]
   reset-ticks
 end
 
@@ -61,20 +56,14 @@ to reset
   clear-drawing
   clear-all-plots
   clear-output
-  ;  if debugFlag = true [show "after clear-all"]
-  ;  if debugFlag = true [show "clear-all"]
-  ;  if debugFlag = true [show count humans]
+  if debugFlag = true [show "after clear-all"
+     show "clear-all"
+     show count humans]
   setup-globals
   open-file ; and read initialisation data from csv file
-            ;  if debugFlag = true [show "after open-file"]
-            ;  if debugFlag = true [show "count humans after open-file"]
-            ;  if debugFlag = true [show count humans]
-  ;  create-humans number_people [set color red] ; TODO
-  ;  if debugFlag = true [show "count humans"]
-  ;  if debugFlag = true [show count humans]
-  ;  create-humans number_people [set color blue] ; TODO
-  ;  if debugFlag = true [show "count humans"]
-  ;  if debugFlag = true [show count humans]
+  if debugFlag = true [show "after open-file"
+     show "count humans after open-file"
+     show count humans]
   reset-ticks
 end
 
@@ -122,11 +111,11 @@ to open-file
     ]
     ;    ask humans with [who = 0] [die]     ; kill human that was initialized with header of csv
     set fileList lput mylist fileList
-    ; if debugFlag = true [show "count humans at end of open-file"]
-    ; if debugFlag = true [show count humans]
+    if debugFlag = true [show "count humans at end of open-file"
+       show count humans]
   ]
-  if debugFlag = true [show "fileList at end of open-file"]
-  if debugFlag = true [show fileList]
+  if debugFlag = true [show "fileList at end of open-file"
+     show fileList]
   file-close
 end
 
@@ -171,20 +160,20 @@ end
 
 to step
   if debugFlag = true [show "---------------- begin of step ----------------"]
-  ; if debugFlag = true [show "count humans at begin of step"]
-  ; if debugFlag = true [show count humans]
+  if debugFlag = true [show "count humans at begin of step"
+     show count humans]
   clear-before-match
   ask humans with [activeFlag = true and sideInt = startSideInt] [ ; start of proposing
-                                                                   ; if debugFlag = true [show "count humans at begin of ask humans with activeFlag=true and sideInt=startSideInt"]
-                                                                   ; if debugFlag = true [show count humans]
-    if debugFlag = true [show "myId"]
-    if debugFlag = true [show id]
-    if debugFlag = true [show "myName"]
-    if debugFlag = true [show name]
-    if debugFlag = true [show "partnerList"]
-    if debugFlag = true [show partnerList]
-    if debugFlag = true [show "hasProposedToList"]
-    if debugFlag = true [show hasProposedToList]
+    if debugFlag = true [show "count humans at begin of ask humans with activeFlag=true and sideInt=startSideInt"
+       show count humans with [activeFlag = true and sideInt = startSideInt]
+       show "myId"
+       show id
+       show "myName"
+       show name
+       show "partnerList"
+       show partnerList
+       show "hasProposedToList"
+       show hasProposedToList]
     let tmpPotentialPartnersList list-difference partnerList hasProposedToList ; set-difference of partnerList \ hasProposedToList
     if length tmpPotentialPartnersList = 0 [
       set activeFlag false ; this human has no potential partners to propose to
@@ -201,12 +190,12 @@ to step
   ask humans with [length gotProposedByList > 0 and sideInt != startSideInt] [
     process-proposals id
   ]
-  if debugFlag = true [show "switchingFlag"]
-  if debugFlag = true [show switchingFlag]
+  if debugFlag = true [show "switchingFlag"
+     show switchingFlag]
   if switchingFlag = true [set startSideInt ((startSideInt + 1) mod 2)]
   if startSideInt = 0 [set startSideInt 2]
-  if debugFlag = true [show "startSideInt"]
-  if debugFlag = true [show startSideInt]
+  if debugFlag = true [show "startSideInt"
+     show startSideInt]
   calc-stats
   tick
   if debugFlag = true [show "############### end of step ###############"]
@@ -219,7 +208,6 @@ to calc-stats
        set current_nr_of_pairs current_nr_of_pairs + 1
     ]
   ]
- show current_nr_of_pairs
  let countedHumans count humans with [sideInt = startSideInt]
   ifelse countedHumans = 0 [
     set current_nr_of_pairs_percent 0
@@ -228,6 +216,11 @@ to calc-stats
     set current_nr_of_pairs_percent current_nr_of_pairs_percent * 100
     if current_nr_of_pairs = 0 [set current_nr_of_pairs_percent 0]
   ]
+  if debugFlag = true [ show "Current Nr of Pairs"
+   show current_nr_of_pairs
+   show "Current Nr of Pairs Percent"
+   show current_nr_of_pairs_percent
+ ]
 end
 
 to clear-before-match
@@ -240,15 +233,15 @@ to propose-to[sender receiver]
   if debugFlag = true [show "---------------- begin of propose-to ----------------"]
   ask humans with [id = sender] [
     set hasProposedToList lput receiver hasProposedToList
-    if debugFlag = true [show "hasProposedToList"]
-    if debugFlag = true [show hasProposedToList]
-    if debugFlag = true [show "receiver"]
-    if debugFlag = true [show receiver]
+    if debugFlag = true [show "hasProposedToList"
+       show hasProposedToList
+       show "receiver"
+       show receiver]
     ask humans with [id = receiver] [
       if debugFlag = true [show "female side"]
       set gotProposedByList lput sender gotProposedByList
-      if debugFlag = true [show "gotProposedByList"]
-      if debugFlag = true [show gotProposedByList]
+      if debugFlag = true [show "gotProposedByList"
+         show gotProposedByList]
     ]
   ]
   if debugFlag = true [show "############### end of propose-to ###############"]
@@ -256,30 +249,30 @@ end
 
 to process-proposals [tmpId]
   if debugFlag = true [show "---------------- begin of process-proposals ----------------"]
-  ; if debugFlag = true [show "count humans at begin of process-proposals"]
-  ; if debugFlag = true [show count humans]
+  if debugFlag = true [show "count humans at begin of process-proposals"
+     show count humans]
   ask humans with [id = tmpId] [
-    if debugFlag = true [show "gotProposedByList"]
-    if debugFlag = true [show gotProposedByList]
-    if debugFlag = true [show "sideInt"]
-    if debugFlag = true [show sideInt]
-    if debugFlag = true [show "maxMatchesInt"]
-    if debugFlag = true [show maxMatchesInt]
+    if debugFlag = true [show "gotProposedByList"
+       show gotProposedByList
+       show "sideInt"
+       show sideInt
+       show "maxMatchesInt"
+       show maxMatchesInt]
     let tmpPotentialCoupleList []
     ifelse length tmpMatchList = 0 [
       set tmpPotentialCoupleList gotProposedByList
     ] [
     set tmpPotentialCoupleList list-union-set tmpMatchList gotProposedByList
     ]
-    if debugFlag = true [show "tmpPotentialCoupleList"]
-    if debugFlag = true [show tmpPotentialCoupleList]
+    if debugFlag = true [show "tmpPotentialCoupleList"
+       show tmpPotentialCoupleList]
     let tmpRejectList []
     let tmpCoupleList []
     ifelse length tmpPotentialCoupleList > maxMatchesInt [
       if debugFlag = true [show "has more proposals than willing to accept"]
       set tmpCoupleList order-list tmpPotentialCoupleList rankList partnerList maxMatchesInt
-      if debugFlag = true [show "tmpCoupleList"]
-      if debugFlag = true [show tmpCoupleList]
+      if debugFlag = true [show "tmpCoupleList"
+         show tmpCoupleList]
       set tmpRejectList list-difference tmpPotentialCoupleList tmpCoupleList
     ] [
     set tmpCoupleList tmpPotentialCoupleList
@@ -298,8 +291,8 @@ to reject-proposals [tmpId rejectList]
   if debugFlag = true [show "---------------- begin of reject-proposals ----------------"]
   ask humans with [id = tmpId] [
     set tmpMatchList  list-difference tmpMatchList rejectList
-    if debugFlag = true [show "tmpMatchList"]
-    if debugFlag = true [show tmpMatchList]
+    if debugFlag = true [show "tmpMatchList"
+       show tmpMatchList]
     foreach rejectList [
       ask humans with [id = ?] [
         set tmpMatchList  list-difference tmpMatchList lput tmpId []
@@ -317,8 +310,8 @@ to create-tmpCouples [tmpId acceptList]
   if debugFlag = true [show "---------------- begin of create-tmpCouples ----------------"]
   ask humans with [id = tmpId] [
     set tmpMatchList acceptList
-    if debugFlag = true [show "tmpMatchList"]
-    if debugFlag = true [show tmpMatchList]
+    if debugFlag = true [show "tmpMatchList"
+       show tmpMatchList]
     foreach acceptList [
       ask humans with [id = ?] [
         set tmpMatchList  list-union-set tmpMatchList lput tmpId []
@@ -335,33 +328,33 @@ end
 to-report order-list [listToOrder ranking partners maxMatches]
   if debugFlag = true [show "---------------- begin of order-list ----------------"]
   set listToOrder list-overlap listToOrder partners
-  if debugFlag = true [show "listToOrder"]
-  if debugFlag = true [show listToOrder]
+  if debugFlag = true [show "listToOrder"
+     show listToOrder]
   if length listToOrder > maxMatches [
     let tmpRanking get-rating-of-list partnerList listToOrder ranking
-    if debugFlag = true [show "tmpRanking"]
-    if debugFlag = true [show tmpRanking]
     let tmpList listToOrder
-    if debugFlag = true [show "tmpList"]
-    if debugFlag = true [show tmpList]
+    if debugFlag = true [show "tmpRanking"
+       show tmpRanking
+       show "tmpList"
+       show tmpList]
     set listToOrder []
     let i 0
     loop [
       if i >= maxMatches [report listToOrder]
       let j position (max tmpRanking) tmpRanking
-      if debugFlag = true [show "j"]
-      if debugFlag = true [show j]
-      if debugFlag = true [show "item j tmpList"]
-      if debugFlag = true [show item j tmpList]
-      if debugFlag = true [show "tmpList"]
-      if debugFlag = true [show tmpList]
+      if debugFlag = true [show "j"
+         show j
+         show "item j tmpList"
+         show item j tmpList
+         show "tmpList"
+         show tmpList]
       set listToOrder lput item j tmpList listToOrder
       set tmpRanking remove-item j tmpRanking
       set tmpList remove-item j tmpList
-      if debugFlag = true [show "listToOrder"]
-      if debugFlag = true [show listToOrder]
-      if debugFlag = true [show "tmpList"]
-      if debugFlag = true [show tmpList]
+      if debugFlag = true [show "listToOrder"
+         show listToOrder
+         show "tmpList"
+         show tmpList]
       set i i + 1
     ]
 
@@ -377,10 +370,10 @@ end
 
 ;; intersection of listA and listB
 to-report list-overlap [listA listB]
-  if debugFlag = true [show "############### begin of list-overlap  ###############"]
-  if debugFlag = true [show listA]
-  if debugFlag = true [show listB]
-  if debugFlag = true [show filter [member? ? listB] listA]
+  if debugFlag = true [show "############### begin of list-overlap  ###############"
+     show listA
+     show listB
+     show filter [member? ? listB] listA]
   if debugFlag = true [show "############### end of list-overlap  ###############"]
   report filter [member? ? listB] listA
 end
@@ -410,8 +403,8 @@ end
 
 to change-input
   set user-input-filename user-input "Type input filename (without extension)."
-  if debugFlag = true [show "user-input-filename"]
-  if debugFlag = true [show user-input-filename]
+  if debugFlag = true [show "user-input-filename"
+     show user-input-filename]
 end
 
 
@@ -604,7 +597,7 @@ SWITCH
 263
 debug
 debug
-1
+0
 1
 -1000
 
