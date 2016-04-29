@@ -1,5 +1,5 @@
 \label{prototype}
-For the simulation model Netlogo was used as a simulation tool whereas the random data was generated with R.
+For the simulation model NetLogo was used as a simulation tool whereas the random data was generated with R.
 In the following, the data model, the R script, the GUI and code from Netlogo will be described.
 \subsection{Data model}
 According to the problem description we defined a generic data model for every individual.
@@ -16,4 +16,30 @@ This data model is valid for the disco example, the university and labour market
 	\item tmpMatchList: list containing the identifiers of individuals to whom a temporary match was established
 	\item activeFlag: boolean value stating if an individual is matched or not respectively if the individual gave up (they already proposed to all individuals from the partnerList but only received rejections)
 \end{itemize}
+
+\subsection{Data generation}
+In order to generate data for the disco example, the statistical computing language R\footnote{Available at \url{https://www.r-project.org/}, accessed April 28, 2016} has been used. 
+This generates a CSV list, which is then read from NetLogo. 
+The script accepts the following parameters:
+\begin{itemize}
+	\item seed: integer value, which is used as a seed by the number generator. The default value is 123.
+	\item numberOfMen: integer value representing the number of men which should be created. The default value is 10.
+	\item numberOfWomen: integer value representing the number of women which should be generated. The default value is 10.
+	\item pickyLower: float value between 0 and 1 representing the lower bound which will be used in order to generate a number that represents how picky a person is. The value 0 means excepts every possible match, the value 1 excepts none.
+	\item pickyUpper: float value between 0 and 1 representing the upper bound which will be used in order to generate a number that represents how picky a person is. The value 0 means excepts every possible match, the value 1 excepts none.
+\end{itemize}
+
+The script can be called as follows from the command line: 
+\begin{verbatim}
+Rscript initDisco.R 123 10 10 0 0
+\end{verbatim}
+
+The script generates a CSV which looks as follows:
+\begin{verbatim}
+"";"id";"name";"maxMatchesInt";"sideInt";"partnerList";"rankList"
+"1";1;"male1";1;1;"13#18#14#17#16#11#20#19#12#15";"0.96#0.95#0.9#0.68#0.57#0.45#0.33#0.25#0.1#0.04"
+...
+"11";11;"female1";1;2;"3#9#5#4#10#8#2#1#6#7";"0.92#0.82#0.7#0.67#0.48#0.41#0.35#0.25#0.22#0.05"
+\end{verbatim}
+
 
