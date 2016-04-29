@@ -37,12 +37,12 @@ Rscript initDisco.R 123 10 10 0 0
 \end{verbatim}
 
 The script generates a CSV which looks as follows:
-\begin{verbatim}
+\begin{lstlisting}[numbers=left, breaklines=true] 
 "";"id";"name";"maxMatchesInt";"sideInt";"partnerList";"rankList"
-"1";1;"male1";1;1;"13#18#14#17#16#11#20#19#12#15";"0.96#0.95#0.9#0.68#0.57#0.45#0.33#0.25#0.1#0.04"
+"1";1;"male1";1;1;"13#18#14#17#16#11#20#19#12#15"; "0.96#0.95#0.9#0.68#0.57#0.45#0.33#0.25#0.1#0.04"
 ...
-"11";11;"female1";1;2;"3#9#5#4#10#8#2#1#6#7";"0.92#0.82#0.7#0.67#0.48#0.41#0.35#0.25#0.22#0.05"
-\end{verbatim}
+"11";11;"female1";1;2;"3#9#5#4#10#8#2#1#6#7"; "0.92#0.82#0.7#0.67#0.48#0.41#0.35#0.25#0.22#0.05"
+\end{lstlisting}
 
 \subsection{GUI}
 One of the main goals in the design phase was to keep the GUI simple and clear.
@@ -85,3 +85,11 @@ With the button Export csv the current properties of all humans are exported to 
 The filename is a combination of the input filename and the current number of ticks.
 
 \subsection{Netlogo code}
+
+
+\subsection{Observations of simulation runs}
+...WORK IN PROGRESS...
+One major observation was, that already after the first step more than half of the population (mostly around 60\%) was matched.
+The first matching step always took the longest.
+As soon as a larger number of people was matched the matching sped up.
+However, the number of pairs increased only slowly, the number of rejections increased much faster.
