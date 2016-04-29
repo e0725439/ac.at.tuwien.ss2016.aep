@@ -107,13 +107,12 @@ to open-file
         set activeFlag true
       ]
     ]
-    ;    ask humans with [who = 0] [die]     ; kill human that was initialized with header of csv
     set fileList lput mylist fileList
     if debugFlag = true [show "count humans at end of open-file"
-       show count humans]
-  ]
-  if debugFlag = true [show "fileList at end of open-file"
+     show count humans
+     show "fileList at end of open-file"
      show fileList]
+  ]
   file-close
 end
 
@@ -158,8 +157,8 @@ end
 
 
 to step
-  if debugFlag = true [show "---------------- begin of step ----------------"]
-  if debugFlag = true [show "count humans at begin of step"
+  if debugFlag = true [show "---------------- begin of step ----------------"
+     show "count humans at begin of step"
      show count humans]
   clear-before-match
   ask humans with [activeFlag = true and sideInt = startSideInt] [ ; start of proposing
@@ -189,11 +188,11 @@ to step
   ask humans with [length gotProposedByList > 0 and sideInt != startSideInt] [
     process-proposals id
   ]
-  if debugFlag = true [show "switchingFlag"
-     show switchingFlag]
   if switchingFlag = true [set startSideInt ((startSideInt + 1) mod 2)]
   if startSideInt = 0 [set startSideInt 2]
-  if debugFlag = true [show "startSideInt"
+   if debugFlag = true [show "switchingFlag"
+     show switchingFlag
+     show "startSideInt"
      show startSideInt]
   calc-stats
   tick
@@ -237,9 +236,9 @@ to propose-to[sender receiver]
        show "receiver"
        show receiver]
     ask humans with [id = receiver] [
-      if debugFlag = true [show "female side"]
       set gotProposedByList lput sender gotProposedByList
-      if debugFlag = true [show "gotProposedByList"
+      if debugFlag = true [show "female side"
+         show "gotProposedByList"
          show gotProposedByList]
     ]
   ]
@@ -247,8 +246,8 @@ to propose-to[sender receiver]
 end
 
 to process-proposals [tmpId]
-  if debugFlag = true [show "---------------- begin of process-proposals ----------------"]
-  if debugFlag = true [show "count humans at begin of process-proposals"
+  if debugFlag = true [show "---------------- begin of process-proposals ----------------"
+     show "count humans at begin of process-proposals"
      show count humans]
   ask humans with [id = tmpId] [
     if debugFlag = true [show "gotProposedByList"
@@ -268,9 +267,9 @@ to process-proposals [tmpId]
     let tmpRejectList []
     let tmpCoupleList []
     ifelse length tmpPotentialCoupleList > maxMatchesInt [
-      if debugFlag = true [show "has more proposals than willing to accept"]
-      set tmpCoupleList order-list tmpPotentialCoupleList rankList partnerList maxMatchesInt
-      if debugFlag = true [show "tmpCoupleList"
+      set tmpCoupleList list-order tmpPotentialCoupleList rankList partnerList maxMatchesInt
+      if debugFlag = true [show "has more proposals than willing to accept"
+         show "tmpCoupleList"
          show tmpCoupleList]
       set tmpRejectList list-difference tmpPotentialCoupleList tmpCoupleList
     ] [
@@ -324,8 +323,8 @@ to create-tmpCouples [tmpId acceptList]
 end
 
 
-to-report order-list [listToOrder ranking partners maxMatches]
-  if debugFlag = true [show "---------------- begin of order-list ----------------"]
+to-report list-order [listToOrder ranking partners maxMatches]
+  if debugFlag = true [show "---------------- begin of list-order ----------------"]
   set listToOrder list-overlap listToOrder partners
   if debugFlag = true [show "listToOrder"
      show listToOrder]
@@ -359,7 +358,7 @@ to-report order-list [listToOrder ranking partners maxMatches]
 
   ]
   report listToOrder
-  if debugFlag = true [show "############### end of order-list ###############"]
+  if debugFlag = true [show "############### end of list-order ###############"]
 end
 
 ;; symmetrical difference: fullList \ toRemoveList
@@ -596,7 +595,7 @@ SWITCH
 263
 debug
 debug
-0
+1
 1
 -1000
 
@@ -657,7 +656,7 @@ SWITCH
 263
 switching
 switching
-0
+1
 1
 -1000
 
