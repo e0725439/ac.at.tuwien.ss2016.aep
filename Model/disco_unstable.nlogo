@@ -287,7 +287,9 @@ end
 
 to reject-proposals [tmpId rejectList]
   if debugFlag = true [show "---------------- begin of reject-proposals ----------------"]
+  let rejecter 0
   ask humans with [id = tmpId] [
+    set rejecter self
     set tmpMatchList  list-difference tmpMatchList rejectList
     if debugFlag = true [show "tmpMatchList"
        show tmpMatchList]
@@ -298,6 +300,7 @@ to reject-proposals [tmpId rejectList]
         if sideInt = 1 [set color blue]
         if sideInt = 2 [set color red]
         set current_nr_of_rejects current_nr_of_rejects + 1
+        remove-link self rejecter
       ]
     ]
   ]
@@ -314,7 +317,7 @@ to create-tmpCouples [tmpId acceptList]
       ask humans with [id = ?] [
         set tmpMatchList  list-union-set tmpMatchList lput tmpId []
         set color green
-        create-pair-with myself
+        create-link-with myself
       ]
       set color green
     ]
@@ -449,6 +452,14 @@ to write-csv [ #filename #items ]
   ]
 end
 
+to remove-link [human1 human2]
+  show "remove-link"
+  show human1
+  show human2
+  ask links with [(end1 = human1 and end2 = human2) or (end1 = human2 and end2 = human1)] [
+    show "works"
+    die]
+end
 ;; http://stackoverflow.com/questions/22462168/netlogo-export-tableau-issues
 to-report quote [ #thing ]
   ifelse is-number? #thing
