@@ -42,7 +42,6 @@ to setup
     show "clear-all"
     show count humans]
   setup-globals
-  open-file ; and read initialisation data from csv file
   if debugFlag = true [show "after open-file"
      show "count humans after open-file"
      show count humans]
@@ -60,7 +59,6 @@ to reset
      show "clear-all"
      show count humans]
   setup-globals
-  open-file ; and read initialisation data from csv file
   if debugFlag = true [show "after open-file"
      show "count humans after open-file"
      show count humans]
@@ -128,6 +126,7 @@ to setup-globals
   set current_nr_of_pairs 0
   set current_nr_of_pairs_percent 0
 
+  open-file ; and read initialisation data from csv file
   ; define starting position and start color
   let xposMen -12 ; starting position for men
   let xposWomen -12 ; starting position for women
