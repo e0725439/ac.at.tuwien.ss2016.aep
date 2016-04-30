@@ -131,30 +131,34 @@ to setup-globals
   let number_women count humans with [sideInt = 2]
   let xposHumansStart current_world_width / 2 ; starting position for humans
   let i 1
-  ask humans with [sideInt = startSideInt] [
-    let number_starting count humans with [sideInt = startSideInt]
-    set shape "person"
-    set size 1
-    set heading 0
-    ; positioning and color
-    set ycor 4
-    ifelse sideInt = 1 [set color blue] [set color red]
-    let xposHumans i / (number_starting + 1) * current_world_width - xposHumansStart
-    set xcor xposHumans
-    set i i + 1
+  foreach sort humans with [sideInt = startSideInt] [
+    ask ? [
+      let number_starting count humans with [sideInt = startSideInt]
+      set shape "person"
+      set size 1
+      set heading 0
+      ; positioning and color
+      set ycor 4
+      ifelse sideInt = 1 [set color blue] [set color red]
+      let xposHumans i / (number_starting + 1) * current_world_width - xposHumansStart
+      set xcor xposHumans
+      set i i + 1
+    ]
   ]
   set i 1
-  ask humans with [sideInt != startSideInt] [
-    let number_notstarting count humans with [sideInt != startSideInt]
-    set shape "person"
-    set size 1
-    set heading 0
-    ; positioning and color
-    set ycor -4
-    ifelse sideInt = 1 [set color blue] [set color red]
-    let xposHumans i / (number_notstarting + 1) * current_world_width - xposHumansStart
-    set xcor xposHumans
-    set i i + 1
+  foreach sort humans with [sideInt != startSideInt] [
+    ask ? [
+      let number_notstarting count humans with [sideInt != startSideInt]
+      set shape "person"
+      set size 1
+      set heading 0
+      ; positioning and color
+      set ycor -4
+      ifelse sideInt = 1 [set color blue] [set color red]
+      let xposHumans i / (number_notstarting + 1) * current_world_width - xposHumansStart
+      set xcor xposHumans
+      set i i + 1
+    ]
   ]
 end
 
@@ -170,32 +174,36 @@ to step
      show "count humans at begin of step"
      show count humans]
   clear-before-match
-  ask humans with [activeFlag = true and sideInt = startSideInt] [ ; start of proposing
-    if debugFlag = true [show "count humans at begin of ask humans with activeFlag=true and sideInt=startSideInt"
-       show count humans with [activeFlag = true and sideInt = startSideInt]
-       show "myId"
-       show id
-       show "myName"
-       show name
-       show "partnerList"
-       show partnerList
-       show "hasProposedToList"
-       show hasProposedToList]
-    let tmpPotentialPartnersList list-difference partnerList hasProposedToList ; set-difference of partnerList \ hasProposedToList
-    if length tmpPotentialPartnersList = 0 [
-      set activeFlag false ; this human has no potential partners to propose to
-      stop ; break
+  foreach sort humans with [activeFlag = true and sideInt = startSideInt] [ ; start of proposing
+    ask ? [
+      if debugFlag = true [show "count humans at begin of ask humans with activeFlag=true and sideInt=startSideInt"
+        show count humans with [activeFlag = true and sideInt = startSideInt]
+        show "myId"
+        show id
+        show "myName"
+        show name
+        show "partnerList"
+        show partnerList
+        show "hasProposedToList"
+        show hasProposedToList]
+      let tmpPotentialPartnersList list-difference partnerList hasProposedToList ; set-difference of partnerList \ hasProposedToList
+      if length tmpPotentialPartnersList = 0 [
+        set activeFlag false ; this human has no potential partners to propose to
+        stop ; break
+      ]
+      if length tmpMatchList >= maxMatchesInt [
+        set activeFlag false ; this human has enough current matches
+        stop
+      ]
+      let myPreferredPartner item 0 tmpPotentialPartnersList ; most preferred partner from tmp...List
+      propose-to id myPreferredPartner
     ]
-    if length tmpMatchList >= maxMatchesInt [
-      set activeFlag false ; this human has enough current matches
-      stop
-    ]
-    let myPreferredPartner item 0 tmpPotentialPartnersList ; most preferred partner from tmp...List
-    propose-to id myPreferredPartner
   ] ; end of proposing
   if debugFlag = true [show "end of proposing"]
-  ask humans with [length gotProposedByList > 0 and sideInt != startSideInt] [
-    process-proposals id
+  foreach sort humans with [length gotProposedByList > 0 and sideInt != startSideInt] [
+    ask ? [
+      process-proposals id
+    ]
   ]
   if switchingFlag = true [set startSideInt ((startSideInt + 1) mod 2)]
   if startSideInt = 0 [set startSideInt 2]
@@ -611,7 +619,7 @@ SWITCH
 263
 debug
 debug
-0
+1
 1
 -1000
 
