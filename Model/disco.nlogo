@@ -28,7 +28,7 @@ globals [
   switchingFlag ; set in setup-globals from GUI-switch
   debugFlag ; set in setup-globals from GUI-switch
   user-input-filename ;
-  input-filename ; set default in setup-globals or from GUI-button
+  input-filename; set default in setup-globals or from GUI-button
   current_nr_of_pairs
   current_nr_of_pairs_percent
   current_nr_of_rejects
@@ -687,18 +687,18 @@ switching
 TEXTBOX
 30
 355
-140
+180
 381
-defaultInputFileName:\ndisco
+Default input filename: disco
 11
 0.0
 1
 
 BUTTON
 20
-395
+380
 172
-428
+413
 change input filename
 change-input
 NIL
@@ -738,6 +738,27 @@ ticks
 0
 1
 11
+
+MONITOR
+20
+460
+170
+505
+Current input filename
+input-filename
+3
+1
+11
+
+TEXTBOX
+20
+425
+205
+466
+Press \"Reset\" to update model!\nOr \"Setup\" to return to default!
+11
+0.0
+1
 
 @#$#@#$#@
 ## AUTHORS
