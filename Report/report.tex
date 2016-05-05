@@ -7,6 +7,7 @@
 
 %%% Preamble
 \documentclass[11pt,english]{article}
+\usepackage[a4paper, total={5.5in, 9in}]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage{fourier} %Add Utopia fonts 
 \usepackage[utf8]{inputenc} %Use UTF8 as inputencryption
@@ -19,12 +20,13 @@
 \usepackage[pdftex]{graphicx} % Enable pdflatex
 \usepackage{url} %Add URL helper
 \usepackage{color} %May be necessary if you want to color links
-\usepackage{hyperref} %Add label and inpaper nagivation helper
 \usepackage[nottoc]{tocbibind} %Remove the Table of Content (ToC) from the ToC
 \usepackage{titling} %Add title helper
 \usepackage{titlesec} %Add text style helper
 \usepackage{fancyhdr} %Add header and footer helper
+\usepackage[usenames,dvipsnames,table]{xcolor} 
 \usepackage{float}
+\usepackage{hyperref}  % Enables cross linking in the electronic document version.
 \usepackage{listings}
 
 %ToDo Notes
@@ -32,6 +34,12 @@
 % \usepackage{todonotes}
 %Disabled in the pdf
 \usepackage[disable]{todonotes}
+
+% the following lines are used in order to prevent word splitting (a.k.a. hyphenation)
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
 
 \newcommand{\sectionbreak}{\clearpage}
 \graphicspath{{figures/}}
@@ -119,8 +127,11 @@
 \section{Summary}
 \input{summary}
 
-%\newpage
-%\listoffigures
+\section{Appendix}
+\input{appendix}
+
+\newpage
+\listoffigures
 
 %\newpage
 %\listoftables
