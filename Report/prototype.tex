@@ -96,27 +96,28 @@ At the beginning of the NetLogo code the extensions, the data model and the need
 The rest of the code is based on procedures (i.e. a sequence of NetLogo commands which begins with \textit{to} and ends with \textit{end}).
 The most important procedures are the following:
 \begin{itemize}
-	\item \textit{setup} and \textit{reset}: both clear all results and reset the whole model to an initial empty state. 
-	\item \textit{open-file}: procedure used to open a CSV list which represents the individuals and their preferences. 
+	\item \textit{setup} and \textit{reset}: both clear all results and reset the whole model (especially the needed variables) to an initial empty state. 
+	\item \textit{open-file}: procedure used to open and import a CSV list which represents the individuals and their preferences. The turtles for the simulation are then created based on the read information.
 	\item \textit{setup-globals}: procedure used to set up all global variables (e.g., current number of pairs, shape of the humans, etc.)
-	\item \textit{step}: procedure which represents going one step in the double sided matching algorithm. The proposing site proposes and the proposals are also processed.
-	\item \textit{go}: calls step until a termination criterion is met.
+	\item \textit{step}: procedure which represents going one step in the double sided matching algorithm. Within this step one side proposes to the other one. The proposal-receiving site processes (accepts/rejects) the proposals.
+	\item \textit{go}: calls the procedure step until a termination criterion is met.
 	\item \textit{calc-stats}: calculate some statistical information (e.g., number of pairs, number of rejections).
 	\item \textit{clear-before-match}: empties the list of the proposals as a preparation for the next matching round.
-	\item \textit{propose-to[sender receiver]}: sends the proposals.
-	\item \textit{process-proposals [tmpId]}: processes the proposals.
-	\item \textit{reject-proposals [tmpId rejectList]}: rejects the proposals.
-	\item \textit{create-tmpCouples [tmpId acceptList]}: creates temporary couples.
+	\item \textit{propose-to[sender receiver]}: sends the proposals (e.g. manages lists containing IDs of individuals an individual already proposed to/an individual got proposed by).
+	\item \textit{process-proposals [tmpId]}: processes the proposals (e.g. orders incoming proposals according to the own preference, calls the method create-tmpCouples to form a couple with the most desired partner, calls method reject-proposals to reject the other proposers).
+	\item \textit{reject-proposals [tmpId rejectList]}: rejects the proposals (e.g. removes the partner-ID from the tmpMatchList, sets the status of the turtle to active - the individual shall try to find another partner in the next round, sets the colour of the rejected individual to the original one and removes an existing link).
+	\item \textit{create-tmpCouples [tmpId acceptList]}: creates temporary couples (e.g. puts the ID of the partner in the tmpMatchList, sets the colour of the individual to green, creates a link to the partner).
 \end{itemize}
+The Netlogo program itself contains comments which explain the procedures and performed steps in a more detailed way.
 
 \clearpage
 \subsection{Simulation Runs}
-The discotheque problem was simulated three times: once with a simple and small dataset of 20 persons (10 men and 10 women) and twice with a dataset of 200 persons (100 men and 100 women).
+The discotheque problem was simulated three times: one time with a simple and small dataset of 20 persons (10 men and 10 women) and twice with a dataset of 200 persons (100 men and 100 women).
 
 \subsubsection{Simulation Run 1: Small Dataset}
-In the first simulation a dataset which represents 20 individuals (10 males and 10 females) was used. 
+In the first simulation run a dataset containing 20 individuals (10 males and 10 females) was used. 
 This dataset was generated using the previously described R script.
-After the first simulation step there were already 6 couples (see figure \ref{fig:sim1_step1}).
+After the first simulation step already 6 couples were formed (see figure \ref{fig:sim1_step1}).
 \begin{figure}[H]
   \centering
   \includegraphics[width=1\textwidth]{sim1_step1}
@@ -134,7 +135,9 @@ After the third step 8 couples were formed (see figure \ref{fig:sim1_step3}).
 \end{figure}
 
 Afterwards the number of couples continued to increase slowly and some of them changed according to the individuals preferences. 
-As we can see in the figure \ref{fig:sim1_step9} the male number 10 (upper right corner) was in a couple with female number 3, however male number 10 is now single, because female number 3 is now in a couple with male number 6 which is better according to their preferences.
+As we can see in figure \ref{fig:sim1_step9} the male number 10 (upper right corner) was in a couple with female number 3. 
+However, male number 10 is now single, because female number 3 changed the partner and is now a couple with male number 6. 
+Female number 3 changed partner because male number 6 better suits her preferences.
 \begin{figure}[H]
   \centering
   \includegraphics[width=1\textwidth]{sim1_step9}
@@ -142,7 +145,8 @@ As we can see in the figure \ref{fig:sim1_step9} the male number 10 (upper right
 	\label{fig:sim1_step9}
 \end{figure}
 
-In the further steps, the couples continued to change according to the individuals preferences and finally after 27 steps the double sided matching problem was solved and 10 couples have been created (see figure \ref{fig:sim1_step27}).
+In the further steps, the couples continued to change according to the individual's preferences. 
+Finally, after 27 steps the double sided matching problem was solved and 10 couples have been created (see figure \ref{fig:sim1_step27}).
 \begin{figure}[H]
   \centering
   \includegraphics[width=1\textwidth]{sim1_step27}
@@ -152,7 +156,7 @@ In the further steps, the couples continued to change according to the individua
 
 \clearpage
 \subsubsection{Simulation Run 2: Large Dataset}
-The second simulation consisted of a dataset representing 100 men and 100 women. 
+In the second simulation run, the algorithm was applied to a dataset containing 100 men and 100 women. 
 In the first step of the simulation 49 couples were formed (see figure \ref{fig:sim2_step1}).
 \begin{figure}[H]
   \centering
@@ -169,7 +173,7 @@ As observed in the previous simulation, in the next few steps the number of form
 	\label{fig:sim2_step3}
 \end{figure}
 
-As the number of steps continued to increase the number of couples increased slowly and a change in the partners was observed (see figure \ref{fig:sim2_step9}).
+As the number of steps grew, the number of couples increased only slowly and a change of couples could be observed (see figure \ref{fig:sim2_step9}).
 \begin{figure}[H]
   \centering
   \includegraphics[width=1\textwidth]{sim2_step9}
@@ -177,8 +181,8 @@ As the number of steps continued to increase the number of couples increased slo
 	\label{fig:sim2_step9}
 \end{figure}
 
-As the simulation went on, the model started to reach a stable point, where the couples increased only slowly and the number of rejections increased much faster. 
-Finally after 127 steps the model has reached a final state where 94 couples were formed.
+As the simulation went on, the model started to reach a stable point, where the number of couples increased only slowly and the number of rejections increased much faster. 
+Finally, after 127 steps, the model has reached a final state where 94 couples were formed. Not every individual could find a partner. This might happen if a person was in a partnership, got rejected and could not find another partner who was not already in a partnership with a higher-ranked person.
 The final state of the model is illustrated in figure \ref{fig:sim2_step127}.
 \begin{figure}[H]
   \centering
@@ -189,7 +193,8 @@ The final state of the model is illustrated in figure \ref{fig:sim2_step127}.
 
 \clearpage
 \subsubsection{Simulation Run 3: Large Dataset and Lower Preferences}
-The second simulation was repeated with a similar dataset, but where the individuals did not have too many preferences (i.e., they were not so picky) regarding their partner.
+The second simulation was repeated with a similar dataset. 
+This time however, the individuals did not have too many preferences (i.e., they were not so picky) regarding their partner.
 During this simulation the couples were formed faster. After the first step (see figure \ref{fig:sim3_step1_not_picky}) there were 59 couples formed (compared to 49 from the previous simulation - see figure \ref{fig:sim2_step1}).
 \begin{figure}[H]
   \centering
@@ -200,7 +205,7 @@ During this simulation the couples were formed faster. After the first step (see
 
 After the third step there were 79 (compared to 73 from the previous simulation) and after the ninth step there were 90 (compared to 83) couples.
 Finally the model reached a stable state after 118 steps, where 100 couples were formed.
-Another observation that was made with the new dataset is that the number of rejections was much lower than in the previous simulation. 
+Another observation with the new dataset was, that the number of rejections was much lower than with the other data set. 
 In the end there were 465 rejections (see figure \ref{fig:sim3_step118_not_picky}) compared to 665 from the previous run (see figure \ref{fig:sim2_step127}).
 \begin{figure}[H]
   \centering
