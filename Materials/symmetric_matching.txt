@@ -1,7 +1,0 @@
-Source: https://www.openabm.org/model/3575/version/2/
-Symmetric two-sided matching
-
-This is a replication model of the matching problem including the mate search problem, which is the generalization of a traditional optimization problem.
-Peter Todd and Geoffery Miller conducted a simulation for two-sided matching problem in symmetric setting in 1999(*). In their model there are the same number of agents in two parties, each of whom has his/her own mate value. Each agent in both parties tries to find his/her mate in the other party based on his/her candidate’s mate value and his/her own aspiration level for the partner’s mate values. Each agent learns his/her own mate value and adjusts his/her aspiration level through the trial period (adolescence). Todd and Miller tried a several search rules and the learning mechanisms. The rules and the mechanisms are symmetric for both parties in this setting. This NetLogo model is a replication of their model.
-
-(*) Peter M. Todd and Geoffery F. Miller, "From pride and prejudice to persuasion", in Gred Gigerenzer, Peter M. Todd and the ABC Research Group, Simple heuristics that makes us smart, Oxford University Press, New York, 1999
