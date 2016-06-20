@@ -1,26 +1,28 @@
 \label{introduction}
 Double sided matching is about finding a match between two sets of elements.
 The first algorithm which should solve this problem was described by David Gale and Lloyd S. Shapley in 1962 \cite{gale62a}. 
-The focus will lie on the examination of this algorithm and the creation of a simulation model for it, which can be applied to different economic issues.
+The focus of this report is on the examination of this algorithm and the creation of a simulation model for it, which can be applied to different economic issues.
 The selected economic issues will be presented in the following chapters. 
-\todo{add one sentence about something}
+\todo{Is the following sentence OK?}
+Due to another important project in the course of this lecture only the partner-matching algorithm was implemented.
+The other two economic issues, the university application and labour supply/demand problem, could not be implemented.
 
 \subsection{Motivation and Problem Description}
-In many daily live situations there are hidden double sided matching problems. 
-For example students usually have the opportunity to apply to a number of schools. 
+Many everyday situations contain hidden double sided matching problems. 
+For example, students usually have the opportunity to apply to a number of schools. 
 In this case students and schools have to be matched together. 
 Both parties have preferences which need to be taken into consideration. 
-In our everyday life we usually don't have the time to find an appropriate solution. 
+Yet, in our everyday life we usually do not have the time to find an appropriate solution for our problems. 
 
 In some cases these problems even go by without solving them. 
-In other cases however, it is crucial to solve them, e.g. if we consider medical school graduates and open positions in hospitals. 
-Due to multiple reasons (e.g. different preferences, high number of elements in the two sets) this problem cannot be solved intuitively or in linear time.
+In other situations however, it is crucial to solve them, e.g. if we consider medical school graduates and open positions in hospitals. 
+Due to multiple reasons like different preferences or a high number of elements in the two sets this problem cannot be solved intuitively or in linear time.
 
 \subsection{Aim and Objectives}
 The aim of this paper is to develop a simulation model prototype which can solve similar problems, like the ones discussed above.
-With this model we could answer questions like:
+Questions, which should be answered with the simulation model are:
 \begin{itemize}
-	\item Are there "stable" solutions for this kind of problem?
+	\item Do there exist "stable" solutions for these kinds of problem?
 	\item How can it be applied to all prospective students and universities in Austria?
 	\item Is there also a solution for the current labour supply and demand in the European Union?
 \end{itemize}
@@ -30,15 +32,10 @@ With this model we could answer questions like:
 In the \hyperref[theory]{second chapter} a theoretical overview is provided regarding the double sided matching problem and what stability means in this context.
 The focus lies on the Gale and Shapley Algorithm, basic information about the game theory and the relationship between them.
 
-The \hyperref[prototype]{third chapter} describes the prototype of the simulation model, which implements the previously discussed theory into practice. 
+The \hyperref[prototype]{third chapter} describes the prototype of the simulation model, which puts the previously discussed theory into practice. 
 As a simulation environment NetLogo \footnote{Available at \url{https://ccl.northwestern.edu/netlogo/}, accessed April 28, 2016} will be used.
 The prototype will be firstly evaluated on a simple discotheque example.
-In this case it is assumed, that an equal number of men and women are in a discotheque and the objective is to form couples.
-
-The \hyperref[evaluation_students]{fourth chapter} deals with the examination of data from Austrian universities and their integration into the prototype. 
-As a result, a solution for this double sided matching problem will be provided.
-
-\hyperref[evaluation_labor]{Chapter five} deals with the labour market in the European Union, trying to match the labour demand and labour supply. 
+In the disco example it is assumed, that an equal number of men and women are in a discotheque and the objective is to form couples.
 
 Finally the most important findings and results are summarized and compared in the \hyperref[summary]{last chapter}.
-Additionally there is a short outlook into further research.
+Additionally a short outlook to further research areas will be provided.
