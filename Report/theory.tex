@@ -33,19 +33,20 @@ The aim of the algorithm is to find a stable way of marrying men and women.
 Each man and woman has own preferences of the marriage partner.
 
 \paragraph{First Iteration\\}
-In the first iteration each man proposes to the woman who he ranked first.
-Afterwards a woman has a list of men that proposed to her. This list might be zero, if not she rejects every men, except her highest preferred man on this list.
+In the first iteration each man proposes to the woman who he ranked on the first place.
+Afterwards a woman has a list of men who proposed to her. This list might not contain anybody. 
+If one man/multiple men proposed to her she rejects every man, except most preferred man on her preference list who proposed to her.
 If a man is not rejected he and the woman create a temporary couple.
-All man who are not in a couple are single.
+All men who are not in a couple are single.
 
 \paragraph{Second Iteration\\}
-In the second interaction each man who is single, proposes to his highest ranked woman, who he didn't already proposed to.
-Each woman now chooses the man which she ranks the highest out of her received proposals.
-If a man is not rejected he and the woman create a temporary couple (Note: after the second iteration some men, who have been in a couple from the first iteration might be now single).
+In the second interaction each man who is single, proposes to his highest ranked woman, to whom he did not propose yet.
+Each woman now chooses the man she ranked the highest out of her received proposals.
+If a man is not rejected he and the woman create a temporary couple (Note: after the second iteration some men, who have been in a couple in the first iteration, might be single again).
 
 \paragraph{Further Iterations\\}
 The third iteration is the same as the second one.
-This continues until no men is single any more.
+This continues until every man is in a couple.
 If this condition is satisfied a stable solution is found for the double sided matching problem.
 The stability of the solution of this algorithm has been proven by contradiction \cite{gale62a}.
 
@@ -53,7 +54,7 @@ The stability of the solution of this algorithm has been proven by contradiction
 
 \subsubsection{General}
 "Game theory is about what happens when people - or genes, or nations - interact" \cite[p. 1]{camerer2003behavioral}.
-An important aspect for participating parties is to anticipate how the opposite party will react on certain actions.
+An important aspect for the participating parties is to anticipate how the opposite party will react on certain actions.
 Mathematics shall help to analyse, understand and estimate outcomes of such games. 
 Depending on the information participants have, they decide how to act basing on rules contained in their strategy.
 Game theory is widely applied in economics.
@@ -69,44 +70,45 @@ In addition there are some assumptions which are made during preparation and exe
 	\item Rationality 
 \end{itemize}
 
-However, these perfect preconditions will never be met in real scenarios. 
+However, these perfect preconditions will never be met in real life scenarios. 
 In the context of double sided matching, it is important to have well-specified choices defined. 
 Nevertheless, there might be chances to get into a nearly worst-case scenario instead.
-But furthermore, as a consequence of these listed assumptions above, there are two different kind of games:
+As a consequence of these listed assumptions above, there are two different kind of games:
  
 \begin{itemize}
 	\item Static ones
 	\item Dynamic ones
 \end{itemize}
 
-The two items can be combined with the following kind of knowledge
+The two items can be combined with the following kinds of knowledge
 
 \begin{itemize}
 	\item Incomplete
 	\item Complete (there is no private information)
 \end{itemize}
 
-Depending on the nature of the game, whether it is static or dynamic and the knowledge is complete or incomplete four different combinations can be made.
-For a better understanding, following examples only consist of two players (every combination can be used for a higher amount of players too):
+Depending on the nature of the game, whether it is static or dynamic and whether the knowledge is complete or incomplete, four different combinations can be made.
+For a better understanding, following examples only consist of two players (every combination can be used for a higher number of players too):
 
 \begin{itemize}
 	\item Static and (in)complete information\\
-	As of complete information, the players action set can be presented in an N x M matrix.
+	As of complete information, the player's action set can be presented in an N x M matrix.
 	Therefore all information (also private) is known to every player and each player is able to easily eliminate the pay-offs of the 		
 	other players. The pay-off is the outcome of a chosen action of a player which depends on the state or previous actions of 
 	the game. The pay-off can change dynamically while the game is in progress.
 	As of incomplete information players are forced to be uncertain about the other player's actions and pay-offs.
 	Besides that, there are two basic steps
 	\begin{enumerate}
-		\item Player 1 and 2 are choosing actions out of a set, which were predefined by them before.
+		\item Player 1 and 2 are choosing actions out of a set, which was predefined by them before.
 		\item After their actions, they receive their pay-offs.
 	\end{enumerate}
 	\item Dynamic and complete information\\
-	When basic assumptions are made on complete information, players will create a strategy to ensure to get the highest return 		
-	of each action. Although the strategy might be changed during the game after each turn.
-	Incomplete information leads to communication of uninformed parties (i.e. closed private 
-	information) which might end up to under- or overestimate the others pay-offs. In general there will be a Nash Equilibrium 
-	between those parties. This equilibrium is created by players because they choose a strategy which do not depend on the other 	players. There are three basic steps: 
+	When basic assumptions are made on complete information, players will create a strategy to ensure to get the highest return of each action. 
+	Although the strategy might be changed during the game after each turn.
+	Incomplete information leads to communication of uninformed parties (i.e. closed private information) which might end up to under- or overestimate the others pay-offs. 
+	In general there will be a Nash Equilibrium between those parties. 
+	This equilibrium is created by players because they choose a strategy which do not depend on the other players. 
+	There are three basic steps: 
 	\begin{enumerate}
 		\item Player 1 chooses an action out of his/her predefined set.
 		\item Player 2 observes player 1's action and chooses an action based on his/her observation.
@@ -145,8 +147,8 @@ Other norms of a game might contain the way an individual proposes to another on
 \clearpage
 \subsubsection{Double Sided Matching Problem and Optimal Stopping}
 The double sided matching problem also relates to the optimal stopping problem. 
-The optimal stopping problem concerns itself with choosing the optimal time to stop an undertaken action and at the same time to minimize the expected costs and maximize the profit. 
-A concrete example for the optimal stopping problem could be a men trying to find a women to spend the rest of his life with. 
+The optimal stopping problem deals with choosing the optimal time to stop an undertaken action and at the same time minimize the expected costs and maximize the profit. 
+A concrete example for the optimal stopping problem could be a man trying to find a woman to spend the rest of his life with. 
 He can meet several different women but when is the optimal time to stop looking?
 
 A few algorithms leading to a possible solution for the optimal stopping problem have been presented by Christian \& Griffiths 2016 \cite{algtoliveby}. 
@@ -155,7 +157,7 @@ Afterwards, the man should immediately propose/choose the next woman he meets wh
 37\% is the provably optimal solution \cite[p. 2]{algtoliveby}. 
 This algorithm is recommended in the case of \textit{no-information games} (e.g. in the case of a partner search, it is hard to quantify the information, because it is hard to compare people to each other. There is no concrete criteria, one can only assume that one person is better or more suitable than another person, but not by how much) \cite[p. 18]{algtoliveby}.
 
-Another possible solution for the previously mentioned problem is to set a threshold from the beginning and to take the first option that exceeds it. 
+Another possible solution for the previously mentioned problem is to set a threshold from the beginning on and to take the first option who exceeds it. 
 Christian \& Griffiths 2016 \cite{algtoliveby} recommended this approach in the case of \textit{full-information games}.
 A suitable example for this case is the sale of a house: the value of the house can be specified clearly and there exists also information about the state of the market. 
 The combined knowledge allows to predict a range of offers. 

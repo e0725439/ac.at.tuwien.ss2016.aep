@@ -2,11 +2,10 @@
 A prototype for solving the double sided matching problem was developed in NetLogo\footnote{Available at \url{https://ccl.northwestern.edu/netlogo/}, accessed April 28, 2016}.
 In this chapter the prototype is evaluated on a discotheque example. 
 In this case, it is assumed that an equal number of men and women are in a discotheque and the objective is to form couples based on the individual preferences.
-Afterwards the prototype will be evaluated on more complex problems (e.g., matching students and universities and matching labour supply and labour demand).
 In the following, the data model, the data generation script, the graphical user interface (GUI) and code from NetLogo will be described.
 
 \subsection{Data Model}
-According to the problem description we defined a generic data model for every individual.
+According to the problem description a generic data model for every individual was defined.
 This data model is valid for the discotheque example, the university and labour market example, and contains the following attributes:
 \begin{itemize}
 	\item id: unique object identifier
@@ -25,8 +24,8 @@ This data model is valid for the discotheque example, the university and labour 
 
 \clearpage
 \subsection{Data Generation}
-In order to generate random data, which represents the individuals and their preferences the statistical computing language R\footnote{Available at \url{https://www.r-project.org/}, accessed April 28, 2016} has been used. 
-The generated data is exported as a CSV list, which is then read from NetLogo. 
+In order to generate random data, which represents the individuals and their preferences the statistical computing language R\footnote{Available at \url{https://www.r-project.org/}, accessed April 28, 2016} was used. 
+The generated data is exported as a CSV list, which is then read by NetLogo. 
 The R script accepts the following parameters:
 \begin{itemize}
 	\item seed: integer value, which is used as a seed by the number generator. The default value is 123.
@@ -134,7 +133,7 @@ After the third step 8 couples were formed (see figure \ref{fig:sim1_step3}).
 	\label{fig:sim1_step3}
 \end{figure}
 
-Afterwards the number of couples continued to increase slowly and some of them changed according to the individuals preferences. 
+Afterwards the number of couples continued to increase slowly and some of them changed according to the individual's preferences. 
 As we can see in figure \ref{fig:sim1_step9} the male number 10 (upper right corner) was in a couple with female number 3. 
 However, male number 10 is now single, because female number 3 changed the partner and is now a couple with male number 6. 
 Female number 3 changed partner because male number 6 better suits her preferences.
@@ -173,7 +172,7 @@ As observed in the previous simulation, in the next few steps the number of form
 	\label{fig:sim2_step3}
 \end{figure}
 
-As the number of steps grew, the number of couples increased only slowly and a change of couples could be observed (see figure \ref{fig:sim2_step9}).
+As the number of steps increased, the number of couples increased only slowly and a change of couples could be observed (see figure \ref{fig:sim2_step9}).
 \begin{figure}[H]
   \centering
   \includegraphics[width=1\textwidth]{sim2_step9}
@@ -203,10 +202,10 @@ During this simulation the couples were formed faster. After the first step (see
 	\label{fig:sim3_step1_not_picky}
 \end{figure}
 
-After the third step there were 79 (compared to 73 from the previous simulation) and after the ninth step there were 90 (compared to 83) couples.
+After the third step there were 79 (compared to 73 from the previous simulation) and after the ninth step there existed already 90 (compared to 83) couples.
 Finally the model reached a stable state after 118 steps, where 100 couples were formed.
 Another observation with the new dataset was, that the number of rejections was much lower than with the other data set. 
-In the end there were 465 rejections (see figure \ref{fig:sim3_step118_not_picky}) compared to 665 from the previous run (see figure \ref{fig:sim2_step127}).
+In the end 465 rejections (see figure \ref{fig:sim3_step118_not_picky}) were counted compared to 665 from the previous run (see figure \ref{fig:sim2_step127}).
 \begin{figure}[H]
   \centering
   \includegraphics[width=1\textwidth]{sim3_step118_not_picky}
