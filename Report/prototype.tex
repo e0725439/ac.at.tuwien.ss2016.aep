@@ -158,9 +158,15 @@ Finally, after 27 steps the double sided matching problem was solved and 10 coup
 \clearpage
 \subsubsection{Simulation Run 2: Large Dataset}
 In the second simulation run, the algorithm was applied to a dataset containing 100 men and 100 women. 
+This dataset was generated using the following R script:
+%
+\begin{verbatim}
+Rscript initDisco.R 123 100 100 0 1
+\end{verbatim}
+%
 In the first step of the simulation 49 couples were formed (see figure \ref{fig:sim2_step1}). 
 One male is extremely picky and does not propose to any female, 
-that's why the number of rejections and number of (temporary) pairs formed does not add to 100, but only to 99.
+that's why the number of rejections and number of (temporary) pairs formed does not add up to 100, but only to 99.
 \begin{figure}[H]
   \centering
   \includegraphics[width=1\textwidth]{sim2_step1}
@@ -197,6 +203,12 @@ The final state of the model is illustrated in figure \ref{fig:sim2_step127}.
 \clearpage
 \subsubsection{Simulation Run 3: Large Dataset and Lower Preferences}
 The second simulation was repeated with a similar dataset. 
+This dataset was generated using the following R script:
+%
+\begin{verbatim}
+Rscript initDisco.R 123 100 100 0 0
+\end{verbatim}
+%
 This time however, the individuals had a full list of preferences (i.e., they were not picky at all) regarding their partner.
 During this simulation the couples were formed faster. After the first step (see figure \ref{fig:sim3_step1_not_picky}) there were 59 couples formed (compared to 49 from the previous simulation - see figure \ref{fig:sim2_step1}).
 \begin{figure}[H]
