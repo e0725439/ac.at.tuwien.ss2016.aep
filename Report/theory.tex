@@ -7,42 +7,42 @@ These sets are disjoint and may be equal in size, but this condition is not mand
 The purpose of the double sided matching algorithm is to find a solution, so every element of the first set has a corresponding counterpart in the other set. 
 This can be best described in an example:
 Assume that the elements are men and women and that individuals have only heterosexuals preferences.
-Consequently, the two sets are male and female persons.
 The double sided matching algorithm shall create couples, which consist of a man and woman.
 Optimally, every person has a partner who has a high position in their list of preferences.
 
 The solutions of the matchings can have different properties, which might be very important (e.g. stability).
-The output of the algorithm of men and women is not allowed to be unstable, i.e.\ there are two men $\alpha$ and $\beta$ who are assigned to women $A$ and $B$ although $\beta$ prefers $A$ to $B$ and $A$ prefers $\alpha$ to $\beta$.
+The output of the algorithm of men and women is not allowed to be unstable, i.e.\ there are two men $\alpha$ and $\beta$ who are assigned to women $A$ and $B$, respectively, although $\beta$ prefers $A$ to $B$ and $A$ prefers $\alpha$ to $\beta$.
+In such a situation $\beta$ would leave $B$ for $A$ and she ($A$) would take him as a preferred partner.
 If this situation does not occur, the assignment is called \textit{stable}.
 If there exists more than one stable solution the \textit{optimal} one can be of particular interest.\\ 
 Optimality means that a solution has the best outcome for an individual or set.
 In this case optimality can be achieved from the perspective of the first set of elements or from the second one.
-There can also be a trade-off from the perspective of the both sets. 
+There can also be a trade-off from the perspective of both sets. 
 In this case optimality is achieved by weighting the expected value of both sets.
 These properties have been described in a more detailed way in the paper by Gale and Shapley \cite{gale62a}.\\
 Generally in economics this is also known as pareto efficiency \cite[p. 46]{9780199297818}. 
-Pareto efficiency is a characteristic for a solution where any change which would improve one property on one hand, but will worsen another one on the other hand.
+Pareto efficiency is a characteristic for a solution where any change which would improve one property on one hand, would worsen another one on the other hand.
 
 
 \subsection{Gale and Shapley Algorithm}
 
 In the paper of Gale and Shapley \cite{gale62a} an algorithm was proposed for solving the double sided matching problem.
 The assumption is that there are two sets of elements: one contains men and the other one women.
-The size of the two sets is equal, the preferences are heterosexual and there are no polygamies (i.e. one element is only allowed to be matched with one element from the other set).
+The size of the two sets is equal, the preferences are heterosexual and polygamy is forbidden (i.e. each element is only allowed to be matched with one element from the other set).
 The aim of the algorithm is to find a stable way of marrying men and women.
-Each man and woman has own preferences of the marriage partner.
+Each man and each woman have individual preferences regarding potential marriage partners (partners from the other sex).
 
 \paragraph{First Iteration\\}
-In the first iteration each man proposes to the woman who he ranked on the first place.
+In the first iteration each man proposes to the woman he ranked first.
 Afterwards a woman has a list of men who proposed to her. This list might not contain anybody. 
-If one man/multiple men proposed to her she rejects every man, except most preferred man on her preference list who proposed to her.
+If one man/multiple men proposed to her she rejects every man, except the most preferred man on her preference list who proposed to her.
 If a man is not rejected he and the woman create a temporary couple.
 All men who are not in a couple are single.
 
 \paragraph{Second Iteration\\}
 In the second interaction each man who is single, proposes to his highest ranked woman, to whom he did not propose yet.
 Each woman now chooses the man she ranked the highest out of her received proposals.
-If a man is not rejected he and the woman create a temporary couple (Note: after the second iteration some men, who have been in a couple in the first iteration, might be single again).
+If a man is not rejected he and the woman create a temporary couple (Note: After the second iteration some men, who have been in a couple in the first iteration, might be single again).
 
 \paragraph{Further Iterations\\}
 The third iteration is the same as the second one.
@@ -54,12 +54,12 @@ The stability of the solution of this algorithm has been proven by contradiction
 
 \subsubsection{General}
 "Game theory is about what happens when people - or genes, or nations - interact" \cite[p. 1]{camerer2003behavioral}.
-An important aspect for the participating parties is to anticipate how the opposite party will react on certain actions.
+An important aspect for the participating parties is to anticipate how the opposite party will react to certain actions.
 Mathematics shall help to analyse, understand and estimate outcomes of such games. 
-Depending on the information participants have, they decide how to act basing on rules contained in their strategy.
+Depending on the information participants have, they decide how to act based on rules contained in their strategy.
 Game theory is widely applied in economics.
 Companies use game theory to estimate e.g. reactions of competitors or behaviour of employees.
-The major advantages of game theory are its precision and its universal applicability to all kind of games. \cite[pp. 1-3]{camerer2003behavioral}
+The major advantages of game theory are its precision and its universal applicability to all kinds of games. \cite[pp. 1-3]{camerer2003behavioral}
 
 In addition there are some assumptions which are made during preparation and execution by every individual who is interacting with another one:
 \begin{itemize}
@@ -72,47 +72,47 @@ In addition there are some assumptions which are made during preparation and exe
 
 However, these perfect preconditions will never be met in real life scenarios. 
 In the context of double sided matching, it is important to have well-specified choices defined. 
-Nevertheless, there might be chances to get into a nearly worst-case scenario instead.
-As a consequence of these listed assumptions above, there are two different kind of games:
+Nevertheless, it is possible to get to a nearly worst-case scenario.
+As a consequence of the assumptions listed above, there are two different kinds of games:
  
 \begin{itemize}
 	\item Static ones
 	\item Dynamic ones
 \end{itemize}
 
-The two items can be combined with the following kinds of knowledge
+These two items can be combined with the following kinds of knowledge
 
 \begin{itemize}
 	\item Incomplete
 	\item Complete (there is no private information)
 \end{itemize}
 
-Depending on the nature of the game, whether it is static or dynamic and whether the knowledge is complete or incomplete, four different combinations can be made.
-For a better understanding, following examples only consist of two players (every combination can be used for a higher number of players too):
+Depending on the nature of the game, whether it is static or dynamic and whether the knowledge is complete or incomplete, four different combinations can be formed.
+For a better understanding, the following examples only consist of two players (every combination can be used with a higher number of players, too):
 
 \begin{itemize}
 	\item Static and (in)complete information\\
-	As of complete information, the player's action set can be presented in an N x M matrix.
+	With complete information, the player's action set can be presented in an N x M matrix.
 	Therefore all information (also private) is known to every player and each player is able to easily eliminate the pay-offs of the 		
 	other players. The pay-off is the outcome of a chosen action of a player which depends on the state or previous actions of 
 	the game. The pay-off can change dynamically while the game is in progress.
-	As of incomplete information players are forced to be uncertain about the other player's actions and pay-offs.
+	With only incomplete information, players are uncertain about the other player's actions and pay-offs.
 	Besides that, there are two basic steps
 	\begin{enumerate}
 		\item Player 1 and 2 are choosing actions out of a set, which was predefined by them before.
-		\item After their actions, they receive their pay-offs.
+		\item After their actions, both players receive their pay-offs.
 	\end{enumerate}
-	\item Dynamic and complete information\\
-	When basic assumptions are made on complete information, players will create a strategy to ensure to get the highest return of each action. 
+	\item Dynamic and (in)complete information\\
+	When basic assumptions are made based on complete information, players will create a strategy to ensure to get the highest return of each action. 
 	Although the strategy might be changed during the game after each turn.
-	Incomplete information leads to communication of uninformed parties (i.e. closed private information) which might end up to under- or overestimate the others pay-offs. 
+	Incomplete information leads to communication between uninformed parties (i.e. closed private information). The parties might end up under- or overestimating the other's pay-off. 
 	In general there will be a Nash Equilibrium between those parties. 
-	This equilibrium is created by players because they choose a strategy which do not depend on the other players. 
+	This equilibrium is created by players because they choose a strategy which does not depend on the other player. 
 	There are three basic steps: 
 	\begin{enumerate}
 		\item Player 1 chooses an action out of his/her predefined set.
 		\item Player 2 observes player 1's action and chooses an action based on his/her observation.
-		\item After their actions, they receive their pay-offs.
+		\item After their actions, both players receive their pay-offs.
 	\end{enumerate}
 \end{itemize}
 
@@ -121,19 +121,19 @@ The previously described theory is based on information of the paper "An introdu
 \subsubsection{Example for the Application of Game Theory}
 Game theory is also very popular in the field of economics.
 Many companies primarily apply game theory to estimate the reactions of their competitors. 
-In the last auction for broadband internet frequencies in Germany, all major providers hired game theorists out of two reasons. 
+In the last auction for broadband internet frequencies in Germany, all major providers hired game theorists for two reasons. 
 Firstly, they wanted to win the auction for the desired frequency and secondly, they also did not want to overpay for the frequency.
-The bidding behaviour of a provider indicated the interest rate for a frequency. 
+The bidding behaviour of a provider indicated their interest for a frequency. 
 As a consequence, other providers retained their bids for parts of this frequency so the interested provider did not need to overpay for it. 
-The positive result for the providers was, that the 700-MHz frequency parts were sold for the minimum bidding price. \cite{gametheoryWelt}
+The positive result for the providers was that the 700-MHz frequency parts were sold for the minimum bidding price. \cite{gametheoryWelt}
 
 \subsubsection{Double Sided Matching Problem and Game Theory}
 
-Like described in chapter \ref{theory}, the goal of the three main problems, which will be simulated in the course of this project, is to bring different parties together.
-In the original marriage problem discussed by Shapley, the goal was to match men and women so the overall situation is stable.
+As described in chapter \ref{theory}, the goal of double-sided matching, which will be simulated in the course of this project, is to bring different parties together.
+In the original marriage problem discussed by Shapley, the goal was to match men and women while having a stable situation overall.
 This idea can also be applied to other areas like the labour market or university applications.
 In each of these three problems the parties need to have a strategy how to react to moves of the counterpart.
-If, for example, a university offers a place to a student and this is not the student's favourite one, he/she has to decide whether to accept the place (to be on the safe side) or still hope to get accepted from the favourite university (and as a consequence accept to be on the waiting list there).
+If, for example, a university offers a place to a student and this is not the student's favourite one, he/she has to decide whether to accept the place (to be on the safe side) or still hope to get accepted from a university they prefer.
 Not only the student needs to have a strategy how to deal with these situations but also universities have to incorporate different reactions of students into their application process (e.g. how many students to invite) \cite{gale62a}. \\
 The double sided matching problem is a dynamic game.
 The players of the two sets have incomplete information.
@@ -142,7 +142,7 @@ The algorithm uses the information of both sets, therefore it has complete infor
 An important aspect of the game or matching is that the rules have to be clear, which was mentioned by Roth and Sotomayor.
 The way agents are matched to each other influences the analysis of the problem.
 A possible rule might be that individuals like a student and university are only brought together if both parties agree to the matching.
-Other norms of a game might contain the way an individual proposes to another one or whether there exists a moderating individual \cite[p. 492]{roth1992two}.
+Other norms of a game might contain the way an individual proposes to another one or whether there exists an individual acting as a moderator \cite[p. 492]{roth1992two}.
 
 \clearpage
 \subsubsection{Double Sided Matching Problem and Optimal Stopping}
@@ -153,9 +153,9 @@ He can meet several different women but when is the optimal time to stop looking
 
 A few algorithms leading to a possible solution for the optimal stopping problem have been presented by Christian \& Griffiths 2016 \cite{algtoliveby}. 
 For the previously mentioned example of partner search, one algorithm proposes to spend 37\% of the time in building standards. 
-Afterwards, the man should immediately propose/choose the next woman he meets who satisfies or over-exceeds his standards.
+Afterwards, the man should immediately propose to/choose the next woman he meets who satisfies or over-exceeds his standards.
 37\% is the provably optimal solution \cite[p. 2]{algtoliveby}. 
-This algorithm is recommended in the case of \textit{no-information games} (e.g. in the case of a partner search, it is hard to quantify the information, because it is hard to compare people to each other. There is no concrete criteria, one can only assume that one person is better or more suitable than another person, but not by how much) \cite[p. 18]{algtoliveby}.
+This algorithm is recommended in the case of \textit{no-information games} (e.g. in the case of a partner search, it is hard to quantify the information, because it is hard to compare people to each other. There is no definite criterion, one can only assume that one person is better or more suitable than another person, but not by how much) \cite[p. 18]{algtoliveby}.
 
 Another possible solution for the previously mentioned problem is to set a threshold from the beginning on and to take the first option who exceeds it. 
 Christian \& Griffiths 2016 \cite{algtoliveby} recommended this approach in the case of \textit{full-information games}.
